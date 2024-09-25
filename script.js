@@ -157,6 +157,26 @@ const usuaris = [{ "nom":"Joana", "llinatges":"Que Ferrer", "sexe":"D", "categor
                   { "nom":"Josep", "llinatges":"Castell Miranda", "sexe":"H", "categoria":"", "hotel":"Hotel Wonder",
                   "entrada":"17/02/2023", "sortida":"19/02/2023", "encarregat":"Marina Darder"}];
 function presentacio(usuaris){
+  usuaris.forEach(usuari=>{
+
+  });
+  for(const usuari of usuaris){
+    const inici = usuari.sexe == "H" ? "Benvolgut" : "Benvolguda"
+    if(usuari.sexe == "H"){
+      var category = usuari.categoria ? `Com usuari ${usuari.categoria} es` : "Es";
+    }
+    else{
+      var category = usuari.categoria ? `Com usuària ${usuari.categoria} es` : "Es";
+    }
+
+  const text = `
+  ${inici} ${usuari.nom},
+  ${category} un plaer donar-te la benvinguda al ${usuari.hotel} en la teva estança del ${usuari.entrada} al ${usuari.sortida}
+  Tant jo com la resta del equip estam a la teva disposició pel qualsevol cosa que necessitis.
+  Atentament,
+  ${usuari.encarregat}`
+  console.log(text);
+  }
   usuaris.forEach(usuari => {
     if(usuari.categoria != ""){
       if(usuari.sexe == "H"){
@@ -209,11 +229,106 @@ function parsMajuscules(saludo){
       nuevoSaludo += saludo.substring(i, i+1);
     }
   }
-
-
-
-
   return nuevoSaludo;
 }
 console.log(parsMajuscules(saludo));
+
+function alterCase(input){
+  var resultat = "";
+
+  var commutador = false;
+  for(var i = 0; i < input.length; i++){
+    if(commutador) resultat += input[i].toUpperCase();
+    else resultat += input[i];
+    commutador = !commutador;
+  }
+  for(var i = 0; i < input.length; i++){
+    resultat += (i % 2 != 0) ? input[i].toUpperCase() : input[i];
+    resultat += input[i];
+    commutador = !commutador;
+  }
+  return resultat;
+}
+console.log(alterCase("hola com estau"));
+
 //-------------------------------- Ex7
+var palabra = "RECONOCER";
+var palabra2 = "HOLA";
+function esPalindromo(palabra){
+  var normal = "";
+  var reversa = "";
+  var pal;
+  for(var i = 0; i < palabra.length; i++){
+    normal += palabra.substring(i, i+1);
+  }
+  for(var j = palabra.length; j > 0; j--){
+    reversa += palabra.substring(j-1, j);
+  }
+  if(normal == reversa){
+    palindromo = true;
+  }
+  else{
+    palindromo = false;
+  }
+  return palindromo;
+}
+function notificarPalindromo(palabra, palindromo){
+  if(palindromo == true){
+    console.log("La palabra " + palabra + " es palíndroma");
+  }
+  else{
+    console.log("La palabra " + palabra + " no es palíndroma.");
+  }
+}
+notificarPalindromo(palabra, esPalindromo(palabra));
+notificarPalindromo(palabra2, esPalindromo(palabra2));
+
+
+
+/*function checkPalindrome(input){
+  var splitString = input.split("");
+  var reversedString = splitString.reverse();
+  var jointString = reversedString.join("");
+
+  return input == jointString;
+}
+console.log(checkPalindrome("ara"));*/
+function checkPalindrome(input){
+  return input.toLowerCase() == input.toLowerCase().split("").reverse().join("");
+}
+console.log(checkPalindrome("ara"));
+
+
+//-------------------------------- Ex8
+// Assignam els elements del contador i el botó
+const colorBtn = document.getElementById('colorBtn');
+const counter = document.getElementById('counter');
+
+// Initializam el contador de clicks
+let clickCount = 0;
+
+// Funció per generar un color aleatori
+function getRandomColor() {
+  /********FALTA FER********/
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)];
+  }
+  return color;
+}
+
+function handleButtonClick() {
+    // Canvia el color de fons
+    document.body.style.backgroundColor = getRandomColor();
+    
+    // Incrementa el contador de clicks
+    clickCount++;
+    
+    // Actualitza el text del contador de clicks
+    counter.textContent = `Contador de clicks: ${clickCount}`;
+}
+
+// Afegir el event listener al botó
+/********FALTA FER********/
+colorBtn.addEventListener("click", handleButtonClick);
