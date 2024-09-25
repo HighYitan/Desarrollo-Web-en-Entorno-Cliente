@@ -39,20 +39,24 @@ function incrementSou(treballadors){
 let incrementats = incrementSou(treballadors);
 console.log("Els treballadors amb el sou augmentat són: ", incrementats);
 //-------------------------------- Ex3
-var roda = ["1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000"];
+const roda = ["1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000"];
 function wheelFortune(wheel){
     const resultats = [];
     var contador = 0;
     while(contador < wheel.length){
-        const indexPremi = Math.floor.Math.random()*wheel.length;
-        const premi = wheel[indexPremi];
-        resultats.push[premi];
-        wheel.splice(indexPremi, 1);
-        if(premi = ""){
-
+        const indexPremi = Math.floor(Math.random()*wheel.length);
+        var premi = wheel[indexPremi];
+        //resultats.push[premi];
+        //wheel.splice(indexPremi, 1);
+        if(premi != ""){
+          resultats.push(premi);
+          premi= "";
+          contador++;
         }
     }
+    return resultats;
 }
+console.log(wheelFortune(roda));
 //-------------------------------- Ex4
 var players = [
     {
@@ -129,13 +133,13 @@ function assignarPremis(players, prizes){
     for(const player of players){
         const prize = prizeIterator.next().value;
         const {nom, llinatjes} = player;
-        resultats.push(nom, llinatjes, prize);
+        resultats.push({nom, llinatjes, prize});
     }
     return resultats;
 }
 console.log(assignarPremis(players, generarPremis()));
 
-var contador = 0;
+/*var contador = 0;
 for(let player of players){
     resultats.push({
         "nom": player.nom,
@@ -144,3 +148,72 @@ for(let player of players){
     });
     contador++;
 }
+*/
+//-------------------------------- Ex5
+const usuaris = [{ "nom":"Joana", "llinatges":"Que Ferrer", "sexe":"D", "categoria":"Platinum", "hotel":"GH Emili Darder",
+                  "entrada":"07/02/2023", "sortida":"09/03/2023", "encarregat":"Marino Darder"},
+                  { "nom":"Marina", "llinatges":"Gabri Ques", "sexe":"D", "categoria":"Silver", "hotel":"GH Palma",
+                  "entrada":"07/03/2023", "sortida":"09/03/2023", "encarregat":"Pere Darder"},
+                  { "nom":"Josep", "llinatges":"Castell Miranda", "sexe":"H", "categoria":"", "hotel":"Hotel Wonder",
+                  "entrada":"17/02/2023", "sortida":"19/02/2023", "encarregat":"Marina Darder"}];
+function presentacio(usuaris){
+  usuaris.forEach(usuari => {
+    if(usuari.categoria != ""){
+      if(usuari.sexe == "H"){
+        console.log(`Estimat ${usuari.nom},
+                    Com usuari ${usuari.categoria} es un plaer donar-te la benvinguda al GH Emili Darder en la teva estança del 07/02/2024 al 09/02/2024.
+                    
+                    Tant jo com la resta del equip estam a la teva disposició pel qualsevol cosa que necessitis.
+                    Atentament,
+                    Marino Darder`);
+      }
+      else if(usuari.sexe == "D"){
+        console.log(`Estimada ${usuari.nom},
+                    Com usuària ${usuari.categoria} es un plaer donar-te la benvinguda al GH Emili Darder en la teva estança del 07/02/2024 al 09/02/2024.
+                    
+                    Tant jo com la resta del equip estam a la teva disposició pel qualsevol cosa que necessitis.
+                    Atentament,
+                    Marino Darder`);
+      }
+    }
+    else{
+      if(usuari.sexe == "H"){
+        console.log(`Estimat ${usuari.nom},
+                    Es un plaer donar-te la benvinguda al GH Emili Darder en la teva estança del 07/02/2024 al 09/02/2024.
+                    
+                    Tant jo com la resta del equip estam a la teva disposició pel qualsevol cosa que necessitis.
+                    Atentament,
+                    Marino Darder`);
+      }
+      else if(usuari.sexe == "D"){
+        console.log(`Estimada ${usuari.nom},
+                    Es un plaer donar-te la benvinguda al GH Emili Darder en la teva estança del 07/02/2024 al 09/02/2024.
+                    
+                    Tant jo com la resta del equip estam a la teva disposició pel qualsevol cosa que necessitis.
+                    Atentament,
+                    Marino Darder`);
+      }
+    }
+  })
+}
+presentacio(usuaris);
+//-------------------------------- Ex6
+var saludo = "hola com estau";
+function parsMajuscules(saludo){
+  var nuevoSaludo = "";
+  for(var i = 0; i < saludo.length; i++){
+    if(i % 2 != 0){
+      nuevoSaludo += saludo.substring(i, i+1).toUpperCase();
+    }
+    else{
+      nuevoSaludo += saludo.substring(i, i+1);
+    }
+  }
+
+
+
+
+  return nuevoSaludo;
+}
+console.log(parsMajuscules(saludo));
+//-------------------------------- Ex7
