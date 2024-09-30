@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "nom": "Jacket",
+        "imatge": "./assets/images/products/jacketnou3.jpg",
+        "descripcio": "Mens Winter Leathers Jackets",
+        "preu": 96.00,
+        "descompte": 30,
+        "puntuacio": 2
+    },
+    {
+        "id": 2,
+        "nom": "Shirt",
+        "imatge": "./assets/images/products/shirtnou1.jpg",
+        "descripcio": "Pure Garment Dyed Cotton Shirt",
+        "preu": 45.00,
+        "descompte": 0,
+        "puntuacio": 4
+    },
+    {
+        "id": 3,
+        "nom": "Jacket",
+        "imatge": "./assets/images/products/jacketnou5.jpg",
+        "descripcio": "MEN Yarn Fleece Full-Zip Jacket",
+        "preu": 58.00,
+        "descompte": 0,
+        "puntuacio": 3
+    },
+    {
+        "id": 4,
+        "nom": "Skirt",
+        "imatge": "./assets/images/products/clothesnou3.jpg",
+        "descripcio": "Black Floral Wrap Midi Skirt",
+        "preu": 35.00,
+        "descompte": 0,
+        "puntuacio": 5
+    },
+    {
+        "id": 5,
+        "nom": "Pocket Watch",
+        "imatge": "./assets/images/products/watchnou3.jpg",
+        "descripcio": "Pocket Watch Leather Pouch",
+        "preu": 150.00,
+        "descompte": 0,
+        "puntuacio": 5
+    },
+    {
+        "id": 6,
+        "nom": "Digital Watch",
+        "imatge": "./assets/images/products/watchnou1.jpg",
+        "descripcio": "Smart watch Vital Plus",
+        "preu": 180.00,
+        "descompte": 30,
+        "puntuacio": 0
+    },
+    {
+        "id": 7,
+        "nom": "Party Wear Shoes",
+        "imatge": "./assets/images/products/partynouwearnou1.jpg",
+        "descripcio": "Womens Party Wear Shoes",
+        "preu": 170.00,
+        "descompte": 30,
+        "puntuacio": 1
+    },
+    {
+        "id": 8,
+        "nom": "Sport Shoes",
+        "imatge": "./assets/images/products/sportsnou1.jpg",
+        "descripcio": "Running & Trekking Shoes - White",
+        "preu": 89.00,
+        "descompte": 30,
+        "puntuacio": 2
+    },
+    {
+        "id": 9,
+        "nom": "Jewelry",
+        "imatge": "./assets/images/products/jewellerynou3.jpg",
+        "descripcio": "Ruby Necklace",
+        "preu": 500.00,
+        "descompte": 0,
+        "puntuacio": 4
+    },
+    {
+        "id": 10,
+        "nom": "Boots",
+        "imatge": "./assets/images/products/shoenou5.jpg",
+        "descripcio": "Leather Boots - Brown",
+        "preu": 112.00,
+        "descompte": 10,
+        "puntuacio": 3
+    },
+    {
+        "id": 11,
+        "nom": "Pocket Watch",
+        "imatge": "./assets/images/products/watchnou4.jpg",
+        "descripcio": "Pocket Watch Golden Pouch",
+        "preu": 160.00,
+        "descompte": 0,
+        "puntuacio": 5
+    },
+    {
+        "id": 12,
+        "nom": "Shirt",
+        "imatge": "./assets/images/products/clothesnou1.jpg",
+        "descripcio": "Pure Garment Female Japanese Cotton Shirt",
+        "preu": 25.00,
+        "descompte": 10,
+        "puntuacio": 2
+    }
+]

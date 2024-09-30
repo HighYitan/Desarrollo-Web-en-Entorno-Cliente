@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    .infoClassName {
+      background-color: yellow;
+    }
+
+    .noticia {
+      background-color: #eee;
+      border: 1px solid #bbb;
+      min-height: 40px;
+      padding: 5px;
+    }
+  </style>
+
+  <script type="text/javascript">
+
+    window.onload = function () {
+
+      // Selectors
+      /********************************************************************/
+      // Recupera l'etiqueta HTML o element amb l'atribut id especificat
+      // Recupera només un element
+      let noticiaPrincipal = document.getElementById("noticia-portada");
+
+      // Recupera totes les etiquetes tipus d'etiqueta especificat ( en aquesta cas 'h2');
+      // Pot recuperar un o més elements
+      let subtitols = document.getElementsByTagName('h2');
+      for (let subtitol of subtitols) {
+        console.log("Info title:" + subtitol.textContent);
+      }
+
+      // Recupera totes les etiquetes amb l'atribut class especificat
+      // Pot recuperar un o més elements
+      let newsList = document.getElementsByClassName('noticia');
+
+      // Recupera l'element HTML amb el selector especificat (només el primer si hi ha varis)
+      let newsItem = document.querySelector('#noticia-portada');
+      let campInfo = document.querySelector('#infoId');
+      console.log("Atributs camp:" + campInfo.name + " " + campInfo.maxLength);
+      /*Altres exemples
+      document.querySelector('.noticia');
+      document.querySelector('p.noticia');
+      */
+
+      // Selecciona tots els elements que es trobi amb la classe (class="noticia")
+      let newsList2 = document.querySelectorAll(".noticia");
+      for (let noticia of newsList2) {
+        console.log("Info noticia:" + noticia.textContent);
+      }
+
+      // HTML
+      /********************************************************************/
+      // Modifica el contigut tipus text
+      noticiaPrincipal.textContent = "Nou text de la noticia principal";
+      // Recupera el contingut tipus text
+      let newsText = noticiaPrincipal.textContent; // o  també newText.innerText;
+      console.log("noticia:" + newsText);
+
+      // Aquesta propietat inserta etiquetes HTML dins de l'element
+      newsItem.innerHTML = "<p>Dades de la noticia</p>" +
+        "<p>Més dades</p>";
+
+
+      // CSS
+      /********************************************************************/
+      // Exemples de com canviar el valor de les propietats css
+
+      // Inicialitzam variables
+      let btnHide = document.getElementById('btn-amaga');
+      let btnShow = document.getElementById('btn-mostra');
+      let containerNews = document.getElementById('container-news');
+
+      // Establim events als botons
+      btnShow.addEventListener("click",
+        function () {
+          containerNews.style.display = "";
+        });
+      btnHide.addEventListener("click",
+        function () {
+          containerNews.style.display = "none";
+        });
+
+      // Canvi d'una propietat en concret
+      noticiaPrincipal.style.fontSize = "25px";
+
+    };
+
+
+  </script>
+</head>
+
+<body>
+  <div id="container-news">
+    <h1> Dades informatives </h1>
+    <div id="noticia-portada">Dades</div>
+
+    <h2>Noticia 1</h2>
+    <p class="noticia">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+      nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.</p>
+    <h2>Noticia 2</h2>
+    <p class="noticia">Contingut noticia 2</p>
+    <h2>Noticia 3</h2>
+    <p class="noticia">Contingut noticia 3</p>
+
+
+    <input type="text" id="infoId" class="camp-cerca" name="infoName" value="" maxlength="30" />
+    <input id="btn-search" type="button" name="cerca" value="Cerca més notícies" />
+
+  </div>
+
+  <div>
+    <input type="button" id="btn-mostra" name="mostra" value="Mostra" />
+    <input type="button" id="btn-amaga" name="amaga" value="amaga" />
+  </div>
+
+</body>
+
+</html>

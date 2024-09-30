@@ -92,14 +92,17 @@ document.addEventListener("DOMContentLoaded", function(){
                         score++;
                         console.log(score);
                     }
-                    showcase[i].style.display = 'none';
-                    switch(score){
-                        case 0:
-                            
-                            showcase[i].style.display = 'block';
-                    }
                     //var score = children[j].getElementsByClassName("fa-star");
                     
+                }
+                //score
+                showcase[i].style.display = 'none';
+                console.log("kekw");
+                switch(this){
+                    case 'zero':
+                        showcase[i].style.display = 'block';
+                        console.log("lol");
+                        break;
                 }
             }
 

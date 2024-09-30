@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style media="screen">
+			span{
+				padding-left: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="llista-jugadors"></div>
+
+		<script type="text/javascript">
+				// CreacteNode vs innerHTML
+				
+				// Definició de la funció
+				function createListPlayers(container, llista){
+					container.innerHTML="";
+					for (let player of llista){
+							let nodeId= document.createTextNode(player.id);
+							let nodeName = document.createTextNode(player.name);
+							let nodeCat = document.createTextNode(player.category);
+
+							let eId = document.createElement("span");
+							let eNom = document.createElement("span");
+							let eCat = document.createElement("span");
+							eId.appendChild(nodeId);
+							eNom.appendChild(nodeName);
+							eCat.appendChild(nodeCat);
+
+							var infoPlayer = document.createElement("p");
+							infoPlayer.className="playerData";
+
+							infoPlayer.appendChild(eId);
+							infoPlayer.appendChild(eNom);
+							infoPlayer.appendChild(eCat);
+
+							container.appendChild(infoPlayer);
+					}
+				}
+
+				function main(){
+						let llista = [
+								{id:1, "name":"Pep", "category":"PRO"},
+								{id:2, "name":"Joan", "category":"PRO"},
+								{id:3, "name":"Elena", "category":"BEG"},
+								{id:4, "name":"Sara", "category":"PRO"}
+						];
+						let contenidor = document.getElementById("llista-jugadors");
+						createListPlayers(contenidor, llista);
+				}
+
+				// Executam el codi
+				main();
+
+		</script>
+	</body>
+</html>
