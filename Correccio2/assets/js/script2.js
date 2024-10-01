@@ -44,16 +44,10 @@ function renderProducts(products){
           <div class="info-1">
             <img src="${product.imatge}" alt="${product.nom}">
             <h3>${product.nom}</h3>
+            <h5>${product.puntuacio}</h5>
             <h4>${product.descripcio}</h4>
           </div>
           <div class="info2">
-            <div class="showcase-rating">
-              <i class="${product.puntuacio > 0 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 1 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 2 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 3 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 4 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-            </div>
             <div class="price-box">
               <p class="price">${reducedPrice} &euro; ${product.descompte? `<del>${product.preu} &euro;</del>`: ""} </p>
               <button>Add</button>
