@@ -20,11 +20,12 @@ async function loadProducts(){
     try{
         const response = await fetch("./assets/data/articles.json");
         const data = await response.json();
-        loadState();
+        
         state.products = data;
-
         state.filteredProducts = [...data];
         state.scoreFilteredProducts = [...data];
+        loadState();
+
         renderProducts(state.products);
     }
     catch(error){
@@ -39,6 +40,10 @@ function renderProducts(products){
         // Posar algo de si es favorit
         const isFavorite = state.favorites.includes(product.id);
         const reducedPrice = (product.preu * (1 - product.descompte / 100)).toFixed(2);
+        let stars = "";
+        for(var i = 0; i < 5; i++){
+            stars += `<i class="star ${product.puntuacio > i ? `fa-solid fa-star`:`fa-solid fa-star grey-star`}" data-id="${product.id}" data-score="${i+1}"></i>`
+        }
         const productCard = `
         <article class="card">
           <div class="info-1">
@@ -47,13 +52,7 @@ function renderProducts(products){
             <h4>${product.descripcio}</h4>
           </div>
           <div class="info2">
-            <div class="showcase-rating">
-              <i class="${product.puntuacio > 0 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 1 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 2 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 3 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-              <i class="${product.puntuacio > 4 ? "fa-solid fa-star" : "fa-solid fa-star grey-star"}"></i>
-            </div>
+            ${stars}
             <div class="price-box">
               <p class="price">${reducedPrice} &euro; ${product.descompte? `<del>${product.preu} &euro;</del>`: ""} </p>
               <button>Add</button>
@@ -71,6 +70,24 @@ function renderProducts(products){
     document.querySelectorAll(".favorite").forEach(icon =>{
         icon.addEventListener('click', toggleFavorite);
     });
+
+    document.querySelectorAll(".star").forEach(icon =>{
+        icon.addEventListener('click', setStarRating);
+    });
+}
+
+function setStarRating(){
+    const productId = Number(event.target.dataset.id);
+    const score = Number(event.target.dataset.score);
+    
+    const product = state.products.find(product => product.id == productId);
+    const filteredProduct = state.filteredProducts.find(product => product.id == productId);
+    if(filteredProduct){
+        product.puntuacio = score;
+        filteredProduct.puntuacio = score;
+        saveState();
+        renderProducts(state.filteredProducts);
+    }
 }
 
 /*function filter(){
@@ -119,7 +136,7 @@ function searchDescription(){
     state.filteredProducts = state.scoreFilteredProducts.filter(product => product.descripcio.toLowerCase().includes(search.value.toLowerCase()));
 
     if(state.filteredProducts.length == 0){
-        productGrid.innerHTML = "There are no prodructs that meet your search criteria.";
+        productGrid.innerHTML = "There are no products that meet your search criteria.";
     }
     else{
         renderProducts(state.filteredProducts);
@@ -161,6 +178,12 @@ function init(){
     document.querySelector(".fa-eraser").addEventListener('click', resetAll);
 
     document.querySelector(".search-container").addEventListener('keyup', searchDescription);
+    /*document.querySelectorAll(".showcase-rating i").forEach(estrella =>{
+        estrella.addEventListener('click', event =>{
+            event.preventDefault();
+            const score =         
+        });
+    });*/
     /*const mainNav = document.getElementsByClassName("main-nav");
     for(const child of mainNav[0].children){
         child.addEventListener('click', filter);
