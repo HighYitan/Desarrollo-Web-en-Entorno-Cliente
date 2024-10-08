@@ -1,0 +1,26 @@
+/*
+.card .price-box button:hover{
+    background-color: #e46918;
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+}
+
+.card .favorite{
+    position: absolute;
+    top:10px;
+    left:10px;
+    z-index: 3;
+}
+
+.card .fa-heart{
+    font-size: 1.4rem;
+    cursor: pointer;
+    color:#cccdce;
+}
+
+.card .fa-regular.fa-heart{
+    font-size: 1.4rem;
+    cursor: pointer;
+    color:#000000;
+}
+*/
