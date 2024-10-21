@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import {data} from "./data/data.js";
+import Card from "./components/Card.jsx";
+import Container from "./components/Container.jsx";
+import {Header} from "./components/Header.jsx";
 
-function App() {
-  return (
+export default function App() {
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header>
+        <div className="grid-similares">
+          {data.map((serie) => (
+            <Card key={serie.id}>
+              <div className="season">
+                {(serie.seasons) ? (serie.seasons > 1) ? serie.seasons + " temporadas" : serie.seasons + " temporada" :
+                (serie.episodes) ? (serie.episodes > 1) ? serie.episodes + " episodios" : serie.seasons + " episodio" :
+                (serie.type) ? (serie.type === "miniserie") ? "Miniserie" : "" : ""}
+              </div>
+              <img src={"/assets/img/"+serie.img} alt={serie.title}/>
+              <Container
+                  matching={serie.matching}
+                  pegi={serie.pegi}
+                  year={serie.year}
+                  desc={serie.desc}
+                  stars={serie.stars}
+              />
+            </Card>
+          ))}
+        </div>
+      </Header>
     </div>
   );
 }
-
-export default App;
