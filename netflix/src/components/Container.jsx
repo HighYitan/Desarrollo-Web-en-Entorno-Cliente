@@ -14,7 +14,7 @@ export default function Container({matching, pegi, year, desc, stars}){
                     <MdAddCircle size="40"/>
                 </div>
             </div>
-            {(stars > 0) && <div className="score">
+            {stars && <div className="score">
                 <div className={(stars > 0) ? "star" : "star-off"}></div>
                 <div className={(stars > 1) ? "star" : "star-off"}></div>
                 <div className={(stars > 2) ? "star" : "star-off"}></div>

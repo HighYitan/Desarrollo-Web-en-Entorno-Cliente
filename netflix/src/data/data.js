@@ -27,6 +27,7 @@ export const data = [
         "pegi":16,
         "matching":50,
         "seasons":2,
+        "stars":3,
         "desc":"Geralt de Rivia, un cazador de monstruos mutante, viaja en pos de su destino por un mundo turbulento en el que, a menudo, los humanos son peores que las bestias."
     },
     {
