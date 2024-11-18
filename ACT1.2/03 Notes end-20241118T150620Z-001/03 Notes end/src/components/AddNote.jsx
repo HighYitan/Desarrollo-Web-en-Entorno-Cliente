@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // This component is for adding new note in our notes application
-function AddNote({ handleAddNote }) {
+export default function AddNote({ handleAddNote }){
     // this noteText is the value for adding Note input
     const [noteText, setNoteText] = useState('');
 
@@ -42,4 +42,3 @@ function AddNote({ handleAddNote }) {
     );
 
 }
-export default AddNote
