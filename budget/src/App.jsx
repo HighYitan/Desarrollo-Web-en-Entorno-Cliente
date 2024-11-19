@@ -48,11 +48,14 @@ export default function App() {
     e.preventDefault(); //Prevent the default behavior of the form. Siempre en un handleSubmit.
     if(charge !== '' && amount > 0){
       if(edit){
-        const newExpense = {id: idRef.current, charge, amount};
-        setExpenses([...expenses, newExpense]);
-        handleAlert({type: 'success', text: 'item added'});
-        idRef.current++;
-      } else {
+        let tempExpenses = expenses.map(expense => {
+          return expense.id === idRef.current ? {...expense, charge, amount} : expense;
+        });
+        setExpenses(tempExpenses);
+        setEdit(false);
+        handleAlert({type: 'success', text: 'item edited'});
+      } 
+      else {
         const newExpense = {id: nanoId(), charge, amount};
         setExpenses([...expenses, newExpense]);
         handleAlert({type: 'success', text: 'item added'});
@@ -65,9 +68,9 @@ export default function App() {
   }
 
   function handleDelete(id){
-    let tempExpenses = expenses.filter(item => item.id !== id);
+    let tempExpenses = expenses.filter(expense => expense.id !== id);
     setExpenses(tempExpenses);
-    handleAlert({type: 'danger', text: 'item deleted'});
+    handleAlert({type: 'danger', text: 'Expense deleted'});
   }
 
   function handleClearItems(){
@@ -76,18 +79,26 @@ export default function App() {
   }
 
   function handleEdit(id){
-    let expense = expenses.find(item => item.id === id);
+    let expense = expenses.find(expense => expense.id === id);
     let {charge, amount} = expense;
     setCharge(charge);
     setAmount(amount);
     setEdit(true);
+    idRef.current = id;
   }
   return (
     <>
       {alert.show && <Alert type={alert.type} text={alert.text}/>}
       <h1>Budget calculator</h1>
       <main className="App">
-        <ExpenseForm/>
+        <ExpenseForm
+          charge={charge}
+          amount={amount}
+          handleCharge={handleCharge}
+          handleAmount={handleAmount}
+          handleSubmit={handleSubmit}
+          edit={edit}
+        />
         <ExpenseList
           expenses={expenses}
           handleDelete={handleDelete}
@@ -95,7 +106,11 @@ export default function App() {
           handleClearItems={handleClearItems}
         />
       </main>
-      <h1>Total spending: </h1>
+      <h1>Total spending:
+        <span className="total">
+          {expenses.reduce((acc, curr) => (acc += curr.amount), 0)}€
+        </span>
+      </h1>
     </>
   );
 }
