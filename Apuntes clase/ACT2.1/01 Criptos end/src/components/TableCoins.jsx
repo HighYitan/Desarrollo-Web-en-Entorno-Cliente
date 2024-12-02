@@ -1,26 +1,27 @@
 import CoinRow from "./CoinRow.jsx"
 
-export default function TableCoins({dataCoins, searchInput}){
+export default function TableCoins({coins, search}){
   const titles = ["#","Coin","Price","Price Change","24h Volume"];
 
-  if(!dataCoins) return <div>no coins</div>
+  if(!coins) return <div>No coins to show</div>
 
-  const filteredCoins = dataCoins.filter(coin =>
-    coin.name.toLowerCase().includes(searchInput.toLowerCase())
+  const filteredCoins = coins.filter(coin => 
+    coin.name.toLowerCase().includes(search.toLowerCase())
   )
 
   return(
     <table className="table table-dark mt-4 table-hover">
       <thead>
-        <tr>
-          {titles.map((title, index) => <td key={index}>{title}</td>)}
+        <tr>{titles.map((title, index) => <td key={index}>{title}</td> )}
         </tr>
-       </thead>        	
+      </thead>
       <tbody>
         {filteredCoins.map((coin, index) =>
-         <CoinRow key={coin.id} coin={coin} index={index+1}/>
-        )}
+          <CoinRow key={coin.id} coin={coin} index={index+1}/>
+        )}      	
       </tbody>
     </table>
   )
 }
+
+
