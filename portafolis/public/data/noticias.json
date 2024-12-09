@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "autor": "HighYitan",
+        "titulo": "La fecha de salida de la API de Baleart ha sido anunciada",
+        "descripcion": "La noticia ha generado un gran revuelo en la comunidad de desarrolladores de las Islas Baleares y se ha confirmado que la API estará disponible a partir del 1 de enero de 2025.",
+        "imagen": "laravel.jpg"
+    },
+    {
+        "id": 2,
+        "autor": "Luislo",
+        "titulo": "Mañana se viene la prueba definitiva de React",
+        "descripcion": "Los participantes lo darán todo en la prueba final de React, donde se decidirá quién es el mejor desarrollador de la comunidad.",
+        "imagen": "reacticono.png"
+    },
+    {
+        "id": 3,
+        "autor": "Lunarion",
+        "titulo": "Se ofrece puesto de trabajo para desarrollador Frontend en DigiEvolution S.A",
+        "descripcion": "La empresa DigiEvolution S.A está buscando un desarrollador Frontend para unirse a su equipo ya que nos falta alguien con mente creativa. Los interesados pueden enviarnos su solicitud por correo electrónico en la sección de Contacto.",
+        "imagen": "shodan-spaceship.jpg"
+    },
+    {
+        "id": 4,
+        "autor": "Sanosuke",
+        "titulo": "Necesitamos más modeladores 3D para la marca corporativa de la empresa.",
+        "descripcion": "La oferta está disponible hasta nuevo aviso, mantente atento al boletín de noticias semanal de la empresa para más información.",
+        "imagen": "model3d.webp"
+    },
+    {
+        "id": 5,
+        "autor": "Mario",
+        "titulo": "Festival deportivo de la comunidad de desarrolladores en las Islas Baleares",
+        "descripcion": "El próximo lunes se celebrará un festival deportivo para los desarrolladores de las Islas Baleares, donde se realizarán diversas actividades deportivas y se premiará a los ganadores, DigiEvolution S.A patrocina el evento y participará a su vez.",
+        "imagen": "emili.jpg"
+    }
+]

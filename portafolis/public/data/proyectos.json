@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "titulo": "Baleart Backend API con Laravel",
+        "descripcion": "Genera una API RESTful con Laravel.",
+        "tecnologias": [
+            "PHP",
+            "Laravel",
+            "MySQL"
+        ],
+        "imagen": "laravel.jpg",
+        "github": "IES-EMILIDARDER/bloc2-laravel-projecte-HighYitan/tree/master"
+    },
+    {
+        "id": 2,
+        "titulo": "Curriculum Vitae con Bootstrap para móviles",
+        "descripcion": "Prototipo de Curriculum Vitae con Bootstrap para móviles utilizando todo tipo de clases Custom/Bootstrap.",
+        "tecnologias": [
+            "HTML",
+            "CSS",
+            "Bootstrap",
+            "JavaScript"
+        ],
+        "imagen": "cv.png",
+        "github": "HighYitan/CV-Prototype",
+        "url": "https://khris-cv.netlify.app/"
+    },
+    {
+        "id": 3,
+        "titulo": "Proyectos Interactivos con React",
+        "descripcion": "Distintas webs interactivas con React; ecommerce, películas, crypto, instagram, calculadora, etc.",
+        "tecnologias": [
+            "HTML",
+            "CSS",
+            "Bootstrap",
+            "JavaScript",
+            "React"
+        ],
+        "imagen": "react.png",
+        "github": "HighYitan/Desarrollo-Web-en-Entorno-Cliente"
+    },
+    {
+        "id": 4,
+        "titulo": "Antiguos Proyectos en Java",
+        "descripcion": "Los inicios de todo buen programador se fundamentan en una base sólida. Aquí se encuentran mis primeros proyectos en Java.",
+        "tecnologias": [
+            "Java"
+        ],
+        "imagen": "java.png",
+        "github": "HighYitan/Programming"
+    }
+]

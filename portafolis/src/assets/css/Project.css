@@ -1,0 +1,6 @@
+.card img{
+    height: 50vw;
+}
+.card.bg-dark{
+    background: linear-gradient(225deg, #7000ff, #000000) !important;
+}

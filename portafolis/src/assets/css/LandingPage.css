@@ -1,0 +1,19 @@
+#rombo {
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+#rombo img{
+    width: 700px;
+    height: 700px;
+}
+@media (max-width: 768px) {
+    #rombo img{
+        width: 550px;
+        height: 550px;
+    }
+}
+@media (max-width: 576px) {
+    #rombo img{
+        width: 300px;
+        height: 300px;
+    }
+}
