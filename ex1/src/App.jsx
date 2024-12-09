@@ -1,11 +1,14 @@
 import {useState, useEffect, useRef} from 'react';
 import {useImmer} from 'use-immer';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {nanoid} from 'nanoid'
+import Youtube from "react-youtube";
+import {evaluate} from "mathjs";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './assets/css/App.css';
-import {nanoid} from 'nanoid'
 import Alert from './components/Alert';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 export default function App() {
   const [alert, setAlert] = useImmer({
@@ -44,7 +47,10 @@ export default function App() {
       .then(data => {
         console.log(data);
         proyectosRef.current = data; // Save data into ref
-        setProyectos(proyectosRef.current);
+        setProyectos(data);
+        /*setProyectos(draft => { //immer - le añades al array existente (draft) las nuevas entradas
+          draft.push(...data);
+        });*/
       })
       .catch(error => {
         console.error(error)
@@ -115,6 +121,10 @@ export default function App() {
   return (
     <div className="App">
       {/*
+
+        {proyectos.map((proyecto, index) => (
+          <div key={index}>{proyecto.title}</div>
+        ))}
       <Router>
         <div className="container-fluid d-flex flex-column min-vh-100 bg-dark bg-gradient">
           <Header />
