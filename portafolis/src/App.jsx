@@ -83,7 +83,7 @@ export default function App() {
     <Router>
       <div className="container-fluid d-flex flex-column min-vh-100 bg-dark bg-gradient">
         <Header />
-        <main class="my-3">
+        <main className="my-3">
         {alert.show && <Alert type={alert.type} text={alert.text}/>} {/*Si queremos que el mensaje de error no sustituya la página entera pero que se vea en el main por 5 segundos*/}
         <Routes>
           <Route path="/" element={<LandingPage />} />
