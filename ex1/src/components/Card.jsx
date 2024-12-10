@@ -1,4 +1,26 @@
-export default function Card({ proyecto }) {
+import { useState } from "react";
+export default function Card({ figure }) {
+    const [favorite, setFavorite] = useState(false);
+    function handleClick() {
+        setFavorite(!favorite);
+        //handleFavorite(id);
+    }
+    return (
+        <article className="card" key={figure.id}>
+            <img src={"./img/" + figure.photo} alt={figure.name} />
+            <h3>{figure.name}</h3>
+            <span>Price: {figure.price} €</span>
+            <div className="brand">Brand: {figure.brand}</div>
+            <div className="description">
+                Description: {figure.description}
+            </div>
+            <div className="stock">Stock: New {figure.stock.new} | Refurbished {figure.stock.refurbished}</div>
+            <div className="favorite" onClick={handleClick}>
+                <i className={"fas fa-heart " + ((favorite) ? "on" : "")}/>
+            </div>
+        </article>
+    )
+    /*
     const github = "https://github.com/";
     const rutaImagen = "/img/";
     return(
@@ -22,14 +44,17 @@ export default function Card({ proyecto }) {
                 </p>
                 <p className="card-text text-white text-center">
                     Tecnologías utilizadas: {/*proyecto.tecnologias.join(", ")*/ /*Si se quiere mostrar las tecnologías sin estilos como texto plano separado por comas*/}
-                    {proyecto.tecnologias.map((tecnologia, index) => (
+            
+                    {/*proyecto.tecnologias.map((tecnologia, index) => (
                         <span key={index} className="badge bg-dark mx-1">
                             {tecnologia}
                         </span>
-                    ))}
+                    ))*/}
+                    /*
                 </p>
                 <a href={github + proyecto.github} className="btn btn-dark mt-3 d-flex justify-content-center"><span className="bi-github me-1"/>Código Fuente<span className="bi-github ms-1"/></a>
             </div>
         </div>
+
     )
-}
+}*/

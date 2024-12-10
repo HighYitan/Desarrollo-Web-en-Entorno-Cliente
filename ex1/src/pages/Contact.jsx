@@ -1,9 +1,13 @@
-import { useState } from 'react';
+/*import { useState } from 'react';
 import '../assets/css/Contact.css';
 import Alert from '../components/Alert';
-
+*/
 export default function Contact() {
-    const [datos, setDatos] = useState({
+    return(
+        <div>Página de Contacto</div>
+    )
+}
+    /*const [datos, setDatos] = useState({
         nombre: '',
         apellido: '',
         email: '',
@@ -185,4 +189,4 @@ export default function Contact() {
             </div>
         </div>
     );
-}
+}*/

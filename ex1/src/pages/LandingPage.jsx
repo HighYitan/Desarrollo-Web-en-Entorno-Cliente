@@ -1,32 +1,89 @@
-import { Fragment } from 'react';
-import '../assets/css/LandingPage.css';
+import { useState, useEffect } from 'react';
+import FilterSection from '../components/FilterSection';
+import Figures from '../components/Figures';
+import Load from '../components/Load';
 
 export default function LandingPage() {
-    const foto = "/img/kekw.jpg";
+    //var favoritos = localStorage.getItem('favoritos') // Obtiene el estado de registro del usuario de sessionStorage
+    const [figures, setFigures] = useState([]);
+    //const [favorites, setFavorites] = useState(favoritos !== null ? JSON.parse(favoritos) : []);
+    const [pagination, setPagination] = useState(8);
+    /*const [alert, setAlert] = useImmer({
+        show: false,
+        type: 'success',
+        message: ''
+    });*/
+    const [filter, setFilter] = useState({
+        minPrice: 0,
+        maxPrice: 0
+    });
+
+    /*useEffect(() => {
+        favoritos = localStorage.getItem('favoritos') && 
+            JSON.parse(localStorage.getItem("react-notes-app-data"))
+    }, []);*/
+  
+    useEffect(() => {
+      fetch('/data/star-wars-figures.json')
+        .then(response => {
+          if(!response.ok){
+              throw new Error("Error en la petición por favor recarga la página");
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data);
+          //proyectosRef.current = data; // Save data into ref
+          setFigures(data);
+          /*setProyectos(draft => { //immer - le añades al array existente (draft) las nuevas entradas
+            draft.push(...data);
+          });*/
+        })
+        .catch(error => {
+          console.error(error)
+          //handleAlert({type: "danger", text: "Error en la petición por favor recarga la página"});
+        });
+    }, []);
+    /*function handleAlert({type, text}){
+        setAlert({show:true, type, text});
+        setTimeout(() => {
+          setAlert({show:false});
+        }, 5000)
+    }*/
+  
+    /*function handleFavorite(id){
+        const newFavorites = figures.filter(figure => {
+            if(figure.id ===favorites.id){
+                figure.favorite = !figure.favorite;
+            }
+            return figure.favorite;
+            setFilter(e.target.value);
+            setProyectos(proyectosRef.current.filter(proyecto => {
+              proyecto.title.toLowerCase().includes(filter.toLowerCase()
+            )}));
+        });
+
+        setFavorites(newFavorites);
+        localStorage.setItem('favoritos', JSON.stringify(newFavorites));
+    }*/
+    function handleLoad(){
+      setPagination(pagination + 4);
+    }
+    function handleFilter(filtrado){
+        const minPrice = filtrado.minPrice;
+        const maxPrice = filtrado.maxPrice;
+        setFilter({minPrice, maxPrice});
+        const newFigures = figures.filter(figure => {
+            return ((figure.price >= filter.minPrice) && (figure.price <= filter.maxPrice))
+        });
+
+        setFigures(newFigures);
+    }
     return (
-        <Fragment>
-            <div className="d-flex justify-content-center">
-                <div id="rombo">
-                    <img className="img-fluid" src={foto} alt="Foto" />
-                </div>
-            </div>
-            <div className="container my-4">
-                <p className="text-center text-lg-start text-white">
-                    ¡Bienvenido a mi portfolio, aquí podrás encontrar información sobre mi
-                    experiencia laboral en el sector tecnológico, noticias mensuales sobre
-                    DigiEvolution S.A y mucho más!
-                    Si deseas ponerte en contacto conmigo o con mi equipo, puedes hacerlo a través del apartado
-                    "Información de contacto". 
-                    <br />
-                    <br />
-                    Soy Khris, desarrollador backend junior y cabecilla de DigiEvolution S.A, con conocimientos en Java, PHP,
-                    Laravel, MySQL, HTML, CSS, SASS, Bootstrap, JavaScript, jQuery, React, Git,
-                    GitHub, entre otros. ¡Espero que disfrutes de mi portfolio!
-                </p>
-                <a className="d-grid btn btn-dark" href="https://khris-cv.netlify.app/">
-                    Aqueste mi CV por si necesitas más información y necesitas de mis servicios {/* Aqueste significa "He aquí" y proviene del castellano antiguo */}
-                </a>
-            </div>
-        </Fragment>
-    );
+        <>
+            <FilterSection handleFilter={handleFilter} />
+            <Figures figures={figures} pagination={pagination} />
+            <Load handleLoad={handleLoad}/>
+        </>
+    )
 }

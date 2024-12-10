@@ -1,9 +1,9 @@
-import Navbar from "./Navbar";
+//import Navbar from "./Navbar";
 import {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 
 export default function Header() {
-    const [titulo, setTitulo] = useState("");
+    /*const [titulo, setTitulo] = useState("");
     const [icono, setIcono] = useState("");
     const ruta = useLocation(); // Hook para obtener la ruta actual y poder actualizar el título en consecuencia.
 
@@ -35,15 +35,20 @@ export default function Header() {
     useEffect(() => {
       actualizaTitulo();
     }, [ruta.pathname]); //Cada vez que se cambie la ruta, se actualiza el título.
-
+  */
     return(
-        <header class="justify-content-center">
+      <header className="bg-primary text-white text-center py-4">
+        <h1>Star Wars Figures Collection</h1>
+        <p>Discover and explore the galaxy's finest figures!</p>
+      </header>
+        /*<header class="justify-content-center">
             <Navbar />
             <div className="row text-white text-center">
                 <span className={icono + " my-3 fs-1"} />
                 <h1>{titulo}</h1>
                 <hr className="border border-light border-top border-3 my-0" />
             </div>
-        </header>
+        </header>*/
+
     )
 }
