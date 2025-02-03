@@ -8,7 +8,7 @@ export default function Header() {
                 style={{ backgroundImage: 'url("path/to/your/banner-image.jpg")' }}
             >
                 {/* Optional content inside the banner */}
-                <div className="flex justify-center items-center h-full bg-black bg-opacity-50">
+                <div className="flex justify-center items-center h-full bg-gray-500">
                     <h1 className="text-white text-3xl font-bold">BaleART</h1>
                 </div>
             </div>

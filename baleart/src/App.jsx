@@ -5,6 +5,8 @@ import './assets/css/App.css'
 import Header from './components/Header'
 import Customization from './components/Customization'
 import Footer from './components/Footer'
+import Spaces from './pages/Spaces'
+import Title from './components/Title'
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -12,9 +14,11 @@ export default function App() {
   return (
     <>
       <Header />
-      <div className="bg-violet-950 pt-2 pb-20 mb-20">
+      <main className="bg-violet-950 pt-2 pb-20 mb-20">
         <Customization />
-      </div>
+        <Title />
+        <Spaces />
+      </main>
       <Footer />
     </>
   )
