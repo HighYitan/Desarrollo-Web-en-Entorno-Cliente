@@ -14,6 +14,23 @@ import Contact from './pages/Contact'
 //import { NavbarFixedContext } from './components/Context'
 
 export default function App() {
+  const jsonObject = {
+    name: "John Doe",
+    age: 30,
+    city: "New York"
+  };
+  
+  // Convert JSON object to string and store it in localStorage
+  localStorage.setItem('user', JSON.stringify(jsonObject));
+
+  // Retrieve the string from localStorage
+  const jsonString = localStorage.getItem('user');
+  
+  // Convert the string back to a JSON object
+  const retrievedObject = JSON.parse(jsonString);
+  
+  console.log(retrievedObject);
+  // Output: { name: "John Doe", age: 30, city: "New York" }
   // He incluido min-h-screen (Mirar en casa si se aplica bien el tailwind para estirar el morado hasta abajo)
   return (
     <Router>
