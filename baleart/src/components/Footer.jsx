@@ -1,5 +1,11 @@
+import { NavLink } from "react-router-dom";
 export default function Footer() {
-    
+    function handleGoingTop(){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
     return(
         <footer className="fixed bottom-0 w-full bg-black text-white py-4">
             <div className="container mx-auto px-4">
@@ -10,16 +16,13 @@ export default function Footer() {
                         </h5>
                     </div>
                     <div className="flex space-x-4 items-center">
-                        <a href="#" className="text-sm font-bold hover:underline">
-                            Qui Som?
-                        </a>
-                        <a href="#" className="text-sm font-bold hover:underline">
-                            Contacta'ns
-                        </a>
+                        <NavLink to="/Nosaltres" className={"text-sm font-bold hover:underline"}>Qui Som?</NavLink>
+                        <NavLink to="/Contacte" className={"text-sm font-bold hover:underline"}>Contacta'ns</NavLink>
                         {/* Scroll to Top Button */}
                         <button
                             id="scrollToTopButton"
                             className="bg-violet-900 text-white font-bold text-3xl py-3 px-6 rounded-full"
+                            onClick={handleGoingTop}
                         >
                             ↑
                         </button>
