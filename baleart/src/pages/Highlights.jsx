@@ -23,10 +23,9 @@ export default function Highlights(){
     };
     return(
         <Carousel responsive={responsive}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+            {[...Array(8)].map((_, index) => (
+                <Card key={index} />
+            ))}
         </Carousel>
     )
 }
