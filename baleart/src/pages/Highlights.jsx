@@ -20,13 +20,13 @@ export default function Highlights(){
           breakpoint: { max: 464, min: 0 },
           items: 1
         }
-      };
+    };
     return(
-          <Carousel responsive={responsive}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </Carousel>
+        <Carousel responsive={responsive}>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </Carousel>
     )
 }
