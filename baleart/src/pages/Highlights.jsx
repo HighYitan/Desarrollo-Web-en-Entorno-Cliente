@@ -1,6 +1,8 @@
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+//import Carousel from "react-multi-carousel";
+//import "react-multi-carousel/lib/styles.css";
 import Card from '../components/Card';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 export default function Highlights(){
     const responsive = {
         superLargeDesktop: {
@@ -22,10 +24,11 @@ export default function Highlights(){
         }
     };
     return(
-        <Carousel responsive={responsive}>
+        <Carousel autoPlay={3000} infiniteLoop={true} showThumbs={false} showStatus={false}>
             {[...Array(8)].map((_, index) => (
-                <Card key={index} />
+                <Card key={index}/>
             ))}
         </Carousel>
+        
     )
 }
