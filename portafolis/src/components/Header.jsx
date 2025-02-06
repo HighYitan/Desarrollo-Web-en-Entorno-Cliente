@@ -42,7 +42,7 @@ export default function Header() {
             <div className="row text-white text-center">
                 <span className={icono + " my-3 fs-1"} />
                 <h1>{titulo}</h1>
-                <hr className="border border-light border-top border-3 my-0" />
+                <hr className="border-3 border-light border-top my-0" />
             </div>
         </header>
     )
