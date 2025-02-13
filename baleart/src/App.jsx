@@ -8,18 +8,19 @@ import Footer from './components/Footer'
 import Highlights from './pages/Highlights';
 import Spaces from './pages/Spaces'
 import Title from './components/Title'
-import Register from './pages/Register'
-import Login from './pages/Login'
+import Register from './pages/user/Register'
+import Login from './pages/user/Login'
 import About from './pages/About'
 import Contact from './pages/Contact'
-import spacesImagesFile from './assets/data/spaces.json'
+import spacesImagesJSON from './assets/data/spaces.json'
 //import { NavbarFixedContext } from './components/Context'
 
 export default function App() {
-  let spacesImagesString = localStorage.getItem('spaces');
+  const apiKey = "p7J4H1G2kLzT9fDxXy3mK8Qc6nA0Wr5vBLpYv7R";
+  let spacesImagesString = localStorage.getItem('spacesImages');
   const [spacesImages, setSpacesImages] = useState(spacesImagesString !== null ? JSON.parse(spacesImagesString) : false); // Estado para verificar si el usuario está registrado
-  let tokenString = localStorage.getItem('token');
-  const [spaces, setSpaces] = useState(tokenString !== null ? JSON.parse(tokenString) : false); // Estado para verificar si el usuario está registrado
+  let spacesString = localStorage.getItem('spaces');
+  const [spaces, setSpaces] = useState(spacesString !== null ? JSON.parse(spacesString) : false); // Estado para verificar si el usuario está registrado
   /*useEffect(() => {
     if (!spaces) {
       fetch(spacesImage)
@@ -32,20 +33,32 @@ export default function App() {
     }
   }, [spaces]);*/
   useEffect(() => {
-    //console.log(spaces);
+    
     if (!spacesImages) {
-      console.log(spacesImages);
-      localStorage.setItem('spaces', JSON.stringify(spacesImagesFile));
-      spacesImagesString = localStorage.getItem('spaces');
-      const spacesImagesJSON = JSON.parse(spacesImagesString);
+      localStorage.setItem('spacesImages', JSON.stringify(spacesImagesJSON));
+      //spacesImagesString = localStorage.getItem('spacesImages');
+      //const spacesImagesJSON = JSON.parse(spacesImagesJSON);
         //.catch(error => console.error('Error fetching data:', error));
       setSpacesImages(spacesImagesJSON);
-      console.log(spacesImages);
     }
-    console.log(spacesImages);
+    if (!spaces) {
+      axios.get("http://baleart.test/api/space", {
+        headers: {
+          "x-api-key": apiKey,
+          "Accept": "application/json"
+        }
+      })
+        .then(response => {
+          localStorage.setItem('spaces', JSON.stringify(response.data.data));
+          setSpaces(response.data.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   }, []);
-  //console.log(spaces);
   console.log(spacesImages);
+  console.log(spaces);
 
   /*useEffect(() => {
     fetch('https://api.example.com/data')
@@ -53,16 +66,6 @@ export default function App() {
       .then(json => setData(json))
       .catch(error => console.error(error));
   }, []);*/
-
-  useEffect(() => {
-    axios.get('baleart.test/api/space')
-      .then(response => {
-        setPosts(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
 
   // Convert JSON object to string and store it in localStorage
   /*localStorage.setItem('user', JSON.stringify(jsonObject));
