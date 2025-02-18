@@ -81,3 +81,87 @@ export default function Card(){
         </div>
     )
 }
+/*
+import { useState, useEffect, useRef } from 'react';
+import { useImmer } from 'use-immer';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { nanoid } from 'nanoid';
+import Youtube from "react-youtube";
+import { evaluate } from "mathjs";
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'; // Import specific icons from react-icons
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './assets/css/App.css';
+import Alert from './components/Alert';
+
+export default function App() {
+  const [alert, setAlert] = useImmer({
+    show: false,
+    type: 'success',
+    message: ''
+  });
+  const registrado = sessionStorage.getItem('registrado');
+  const [registro, setRegistro] = useState(registrado !== null ? JSON.parse(registrado) : false);
+  const [proyectos, setProyectos] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(true);
+  const proyectosRef = useRef([]);
+
+  useEffect(() => {
+    fetch('/data/proyectos.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Error en la petición por favor recarga la página");
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        proyectosRef.current = data; // Save data into ref
+        setProyectos(data);
+      })
+      .catch(error => {
+        console.error(error);
+        setAlert(draft => {
+          draft.show = true;
+          draft.type = "danger";
+          draft.message = "Error en la petición por favor recarga la página";
+        });
+      });
+  }, []);
+
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    setFilter(value);
+    setProyectos(proyectosRef.current.filter(proyecto =>
+      proyecto.title.toLowerCase().includes(value.toLowerCase())
+    ));
+  };
+
+  return (
+    <div className="App">
+      {alert.show && <Alert type={alert.type} text={alert.message} />}
+      <input
+        type="text"
+        placeholder="Filter projects"
+        value={filter}
+        onChange={handleFilterChange}
+      />
+      <div>
+        {proyectos.map((proyecto, index) => (
+          <div key={index}>
+            <h3>{proyecto.title}</h3>
+            <div className="score">
+              <FaStar className={(proyecto.stars > 0) ? "star" : "star-off"} />
+              <FaStar className={(proyecto.stars > 1) ? "star" : "star-off"} />
+              <FaStar className={(proyecto.stars > 2) ? "star" : "star-off"} />
+              <FaStar className={(proyecto.stars > 3) ? "star" : "star-off"} />
+              <FaStar className={(proyecto.stars > 4) ? "star" : "star-off"} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+*/

@@ -13,6 +13,8 @@ import Login from './pages/user/Login'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import spacesImagesJSON from './assets/data/spaces.json'
+import { ThemeContextProvider } from './context/ThemeContext';
+import { DataContextProvider } from './context/DataContext';
 //import { NavbarFixedContext } from './components/Context'
 
 export default function App() {
@@ -32,7 +34,8 @@ export default function App() {
         .catch(error => console.error('Error fetching data:', error));
     }
   }, [spaces]);*/
-  useEffect(() => {
+  
+  /*useEffect(() => {
     
     if (!spacesImages) {
       localStorage.setItem('spacesImages', JSON.stringify(spacesImagesJSON));
@@ -58,7 +61,7 @@ export default function App() {
     }
   }, []);
   console.log(spacesImages);
-  console.log(spaces);
+  console.log(spaces);*/
 
   /*useEffect(() => {
     fetch('https://api.example.com/data')
@@ -80,22 +83,26 @@ export default function App() {
   // Output: { name: "John Doe", age: 30, city: "New York" }
   // He incluido min-h-screen (Mirar en casa si se aplica bien el tailwind para estirar el morado hasta abajo)
   return (
-    <Router>
-        <Header />
-        <main className="bg-violet-950 min-h-screen pt-2 pb-20 mb-20">
-          <Customization />
-          <Title />
-          <Routes>
-            <Route path="/" element={<Highlights />} />
-            <Route path="/Nosaltres" element={<About />} />
-            <Route path="/Contacte" element={<Contact />} />
-            <Route path="/Registre" element={<Register />} />
-            <Route path="/Autenticar" element={<Login />} />
-            <Route path="/Espais" element={<Spaces />}/>
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </main>
-        <Footer />
-    </Router>
+    <DataContextProvider>
+      <ThemeContextProvider>
+        <Router>
+            <Header />
+            <main className="bg-violet-950 min-h-screen pt-2 pb-20 mb-20">
+              <Customization />
+              <Title />
+              <Routes>
+                <Route path="/" element={<Highlights />} />
+                <Route path="/Nosaltres" element={<About />} />
+                <Route path="/Contacte" element={<Contact />} />
+                <Route path="/Registre" element={<Register />} />
+                <Route path="/Autenticar" element={<Login />} />
+                <Route path="/Espais" element={<Spaces />}/>
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </main>
+            <Footer />
+        </Router>
+      </ThemeContextProvider>
+    </DataContextProvider>
   )
 }

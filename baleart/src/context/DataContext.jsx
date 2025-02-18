@@ -1,13 +1,10 @@
-import {createContext} from 'react';
-//export const NavbarFixedContext = createContext();
-
-/*import { createContext, useState, useEffect } from 'react';
+import {createContext, useState, useEffect} from 'react';
 import axios from 'axios';
 import spacesImagesJSON from '../assets/data/spaces.json';
 
-export const AppContext = createContext();
+export const DataContext = createContext(); // Crear el contexto de la aplicación (Se le puede dar un valor por defecto entre parentesis)
 
-export const AppProvider = ({ children }) => {
+export const DataContextProvider = ({children}) => {
   const apiKey = "p7J4H1G2kLzT9fDxXy3mK8Qc6nA0Wr5vBLpYv7R";
   let spacesImagesString = localStorage.getItem('spacesImages');
   const [spacesImages, setSpacesImages] = useState(spacesImagesString !== null ? JSON.parse(spacesImagesString) : false);
@@ -17,11 +14,11 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     if (!spacesImages) {
       localStorage.setItem('spacesImages', JSON.stringify(spacesImagesJSON));
+      //spacesImagesString = localStorage.getItem('spacesImages');
+      //const spacesImagesJSON = JSON.parse(spacesImagesJSON);
+        //.catch(error => console.error('Error fetching data:', error));
       setSpacesImages(spacesImagesJSON);
     }
-  }, [spacesImages]);
-
-  useEffect(() => {
     if (!spaces) {
       axios.get("http://baleart.test/api/space", {
         headers: {
@@ -37,15 +34,12 @@ export const AppProvider = ({ children }) => {
           console.error(error);
         });
     }
-  }, [spaces, apiKey]);
-
+  }, []);
+  console.log(spacesImages);
+  console.log(spaces);
   return (
-    <AppContext.Provider value={{ spaces, spacesImages }}>
-      {children}
-    </AppContext.Provider>
-  );
-};*/
-
-/*<AppProvider>
-    El router en app.jsx
-</AppProvider>*/
+      <DataContext.Provider value={{ spacesImages, spaces }}>
+          {children}
+      </DataContext.Provider>
+  )
+}
