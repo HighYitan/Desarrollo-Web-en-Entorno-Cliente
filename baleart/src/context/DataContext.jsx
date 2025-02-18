@@ -6,9 +6,9 @@ export const DataContext = createContext(); // Crear el contexto de la aplicaciÃ
 
 export const DataContextProvider = ({children}) => {
   const apiKey = "p7J4H1G2kLzT9fDxXy3mK8Qc6nA0Wr5vBLpYv7R";
-  let spacesImagesString = localStorage.getItem('spacesImages');
+  const spacesImagesString = localStorage.getItem('spacesImages');
   const [spacesImages, setSpacesImages] = useState(spacesImagesString !== null ? JSON.parse(spacesImagesString) : false);
-  let spacesString = localStorage.getItem('spaces');
+  const spacesString = localStorage.getItem('spaces');
   const [spaces, setSpaces] = useState(spacesString !== null ? JSON.parse(spacesString) : false);
 
   useEffect(() => {
