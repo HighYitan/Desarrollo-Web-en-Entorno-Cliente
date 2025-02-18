@@ -31,43 +31,52 @@ export default function Navbar() {
         <div className={"flex justify-start items-center h-full space-x-4 " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
           {!token ? (
             <>
-              {ruta.pathname === "/" && (
-                <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
-              )}
-              {ruta.pathname !== "/Registre" && (
+              {route !== "/Registre" && (
                 <NavLink to="/Registre" className={"font-bold text-xl"}>Registrar-se</NavLink>
               )}
-              {ruta.pathname === "/Autenticar" && (
+              {route !== "/Autenticar" && (
                 <NavLink to="/Autenticar" className={"font-bold text-xl"}>Autenticar-se</NavLink>
+              )}
+              {route !== "/" && (
+                <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
               )}
             </>
           ) : (
             <>
-              {ruta.pathname === "/Perfil" && (
+              {route !== "/Perfil" && (
+                <NavLink to="/" className={"font-bold text-xl"}>Perfil</NavLink>
+              )}
+              {route !== "/" && (
                 <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
               )}
-              {ruta.pathname === "/Espais" && (
+              {route !== "/Espais" && (
                 <NavLink to="/Espais" className={"font-bold text-xl"}>Espais</NavLink>
               )}
-              {ruta.pathname === "/Comentaris" && (
+              {route !== "/Comentaris" && (
                 <NavLink to="/Comentaris" className={"font-bold text-xl"}>Comentaris</NavLink>
               )}
             </>
           )}
-          
-          
-          
-          {!token ?
-            ruta.pathname !== "/Registre" ? <NavLink to="/Registre" className={"font-bold text-xl"}>Registrar-se</NavLink>
-            ? ruta.pathname !== "/Autenticar" ? <NavLink to="/Autenticar" className={"font-bold text-xl"}>Autenticar-se</NavLink>
-            ? ruta.pathname !== "/" ? <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink> : "" : "" : "" :
-            ruta.pathname !== "/Perfil" ? <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
-            ? ruta.pathname !== "/Espais" ? <NavLink to="/Espais" className={"font-bold text-xl"}>Espais</NavLink>
-            ? ruta.pathname !== "/Comentaris" ? <NavLink to="/Comentaris" className={"font-bold text-xl"}>Comentaris</NavLink> : "" : "" : "" : ""
-            : "" : "" : ""}
         </div>
+        {route !== "/Comentaris" && (
+                <NavLink to="/Comentaris" className={"font-bold text-xl"}>Comentaris</NavLink>
+        )}
         <div className={"flex justify-end items-center h-full space-x-4 " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
             <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
+
+            {!token ? (
+            <>
+              {route !== "/" && (
+                <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
+              )}
+            </>
+          ) : (
+            <>
+              {route !== "/Perfil" && (
+                <NavLink to="/" className={"font-bold text-xl"}>Filtros</NavLink>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
