@@ -1,7 +1,6 @@
 import {useContext, useState, useEffect} from "react";
-import {useLocation} from "react-router-dom";
-import { TokenContext } from "../context/TokenContext";
 import { ThemeContext } from "../context/ThemeContext";
+import { TokenContext } from "../context/TokenContext";
 import {NavLink} from "react-router-dom";
 export default function Navbar() {
   const { theme } = useContext(ThemeContext);
@@ -37,9 +36,6 @@ export default function Navbar() {
               {route !== "/Autenticar" && (
                 <NavLink to="/Autenticar" className={"font-bold text-xl"}>Autenticar-se</NavLink>
               )}
-              {route !== "/" && (
-                <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
-              )}
             </>
           ) : (
             <>
@@ -58,12 +54,7 @@ export default function Navbar() {
             </>
           )}
         </div>
-        {route !== "/Comentaris" && (
-                <NavLink to="/Comentaris" className={"font-bold text-xl"}>Comentaris</NavLink>
-        )}
         <div className={"flex justify-end items-center h-full space-x-4 " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-            <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
-
             {!token ? (
             <>
               {route !== "/" && (

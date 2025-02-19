@@ -17,7 +17,7 @@ export default function Carousel(){
     };
 
     return (
-        <div className="relative w-full max-w-4xl mx-auto bg-black">
+        <div className="relative w-4/6 mx-auto bg-black">
             <div className="overflow-hidden">
                 <div
                     className="flex transition-transform duration-500"
