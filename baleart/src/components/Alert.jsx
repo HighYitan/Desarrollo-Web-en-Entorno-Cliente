@@ -1,15 +1,22 @@
 import {useContext} from "react";
 import { ThemeContext } from "../context/ThemeContext";
-export default function Alert({ type, errorList }){
+export default function Alert({ type, errors }) {
     const { theme } = useContext(ThemeContext);
 
-    //Alert tailwindcss list
+    //For traduction if the language is changed.
+    const requirements = {
+        nom: ["The nom field is required.", "The nom field must be at least 2 characters.", "The nom field must be less than 100 characters.", "The nom field must be a string."],
+        cognom: ["The cognom field is required.", "The cognom field must be at least 2 characters.", "The cognom field must be less than 100 characters.", "The cognom field must be a string."],
+        email: ["The email field is required.", "The email field must be at least 6 characters.", "The email field must be less than 100 characters.", "The email field format is invalid.", "The email field must be a string."],
+        telèfon: ["The telèfon field is required.", "The telèfon field must be at least 7 characters.", "The telèfon field must be less than 100 characters.", "The telèfon field must be a string."],
+        contrasenya: ["The contrasenya field is required.", "The contrasenya field must be at least 6 characters.", "The contrasenya field must be less than 100 characters.", "The contrasenya field format is invalid.", "The contrasenya field must be a string."]
+    }
     return(
         <div
-            className={"flex p-4 mb-4 text-sm rounded-lg " + ((type === "danger") ? ((theme === "dark") ? "bg-gray-800 text-red-400" : "text-red-800 bg-red-50") :
-                ((type === "success") ? ((theme === "dark") ? "bg-gray-800 text-green-400" : "text-green-800 bg-green-50") :
-                    ((type === "info") ? ((theme === "dark") ? "bg-gray-800 text-blue-400" : "text-blue-800 bg-blue-50") :
-                        ((type === "warning") && ((theme === "dark") ? "bg-gray-800 text-yellow-400" : "text-yellow-800 bg-yellow-50"))
+            className={"flex p-4 mb-4 text-sm rounded-lg " + ((type === "danger") ? ((theme === "dark") ? "bg-red-950 text-red-300" : "bg-red-300 text-red-950") :
+                ((type === "success") ? ((theme === "dark") ? "bg-green-950 text-green-300" : "bg-green-300 text-green-950") :
+                    ((type === "info") ? ((theme === "dark") ? "bg-blue-950 text-blue-300" : "bg-blue-300 text-blue-950") :
+                        ((type === "warning") && ((theme === "dark") ? "bg-yellow-950 text-yellow-300" : "bg-yellow-300 text-yellow-950"))
                     )
                 )
             )}
@@ -24,13 +31,13 @@ export default function Alert({ type, errorList }){
             >
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
-            <span className="sr-only">Info</span>
+            <span className="sr-only">Alert Info</span>
             <div>
                 <span className="font-medium">Ensure that these requirements are met:</span>
                 <ul className="mt-1.5 list-disc list-inside">
-                    <li>At least 10 characters (and up to 100 characters)</li>
-                    <li>At least one lowercase character</li>
-                    <li>Inclusion of at least one special character, e.g., ! @ # ?</li>
+                {errors && errors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                ))}
                 </ul>
             </div>
         </div>

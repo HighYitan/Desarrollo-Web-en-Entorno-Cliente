@@ -30,7 +30,7 @@ export default function Footer() {
                         {/* Scroll to Top Button */}
                         <button
                             id="scrollToTopButton"
-                            className="bg-violet-900 text-white font-bold text-3xl py-3 px-6 rounded-full"
+                            className={"font-bold text-3xl py-3 px-6 rounded-full " + ((theme === "dark") ? "bg-violet-950 text-white" : "bg-violet-300 text-gray-900")}
                             onClick={handleGoingTop}
                         >
                             ↑

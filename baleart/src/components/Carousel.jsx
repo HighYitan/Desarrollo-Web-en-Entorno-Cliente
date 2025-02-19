@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ThemeContext } from "../context/ThemeContext";
 
 export default function Carousel(){
+    const { theme } = useContext(ThemeContext);
     const images = [
         'https://abcmallorcastorage.blob.core.windows.net/images/2012/03/GR65510-abc.jpg',
         'https://abcmallorcastorage.blob.core.windows.net/images/2012/03/GR65510-abc.jpg',
@@ -17,7 +19,7 @@ export default function Carousel(){
     };
 
     return (
-        <div className="relative w-4/6 mx-auto bg-black">
+        <div className={"relative w-full sm:w-4/6 mx-auto " + ((theme === "dark") ? "bg-black" : "bg-gray-300")}>
             <div className="overflow-hidden">
                 <div
                     className="flex transition-transform duration-500"
@@ -35,18 +37,24 @@ export default function Carousel(){
             </div>
             <button
                 onClick={prevSlide}
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white py-2 px-4 rounded-full"
+                className={"absolute top-1/2 left-0 transform -translate-y-1/2 py-2 px-4 rounded-full "
+                    + ((theme === "dark") ? "bg-black text-white" : "bg-gray-300 text-gray-900")}
             >
                 &#10094; {/* HTML Left Arrow */}
             </button>
             <button
                 onClick={nextSlide}
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white py-2 px-4 rounded-full"
+                className={"absolute top-1/2 right-0 transform -translate-y-1/2 py-2 px-4 rounded-full "
+                    + ((theme === "dark") ? "bg-black text-white" : "bg-gray-300 text-gray-900")}
             >
                 &#10095; {/* HTML Right Arrow */}
             </button>
-            <div className="absolute bottom-[-4rem] left-0 right-0 flex justify-center items-center space-x-2 bg-black h-16">
-                <h1 className="text-xl sm:text-4xl font-bold text-white drop-shadow-[0_10.2px_10.2px_rgba(0,0,0,0.8)] mb-2">Es Baluard</h1>
+            <div className={"absolute bottom-[-4rem] left-0 right-0 flex justify-center items-center space-x-2 h-16 " + 
+                ((theme === "dark") ? "bg-black" : "bg-gray-300")}
+            >
+                <h1 className={"text-xl sm:text-4xl font-bold drop-shadow-[0_10.2px_10.2px_rgba(0,0,0,0.8)] mb-2 " +
+                    ((theme === "dark") ? "text-white" : "text-gray-900")}
+                >Es Baluard</h1>
             </div>
         </div>
     );

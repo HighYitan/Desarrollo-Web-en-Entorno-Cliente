@@ -5,7 +5,7 @@ export const TokenContext = createContext();
 
 export const TokenContextProvider = ({children}) => {
     const tokenCache = localStorage.getItem('tokenCache');
-    console.log(tokenCache);
+    //console.log(tokenCache);
     const [token, setToken] = useState(!tokenCache ? JSON.parse(tokenCache) : null); // Estado para verificar si el usuario está registrado
     const loginCache = localStorage.getItem('loginCache');
     const [login, setLogin] = useState(loginCache !== null ? JSON.parse(loginCache) : null); // Estado para verificar si el usuario está registrado

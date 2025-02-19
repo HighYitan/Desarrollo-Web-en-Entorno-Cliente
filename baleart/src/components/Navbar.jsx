@@ -42,9 +42,6 @@ export default function Navbar() {
               {route !== "/Perfil" && (
                 <NavLink to="/" className={"font-bold text-xl"}>Perfil</NavLink>
               )}
-              {route !== "/" && (
-                <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
-              )}
               {route !== "/Espais" && (
                 <NavLink to="/Espais" className={"font-bold text-xl"}>Espais</NavLink>
               )}
@@ -55,19 +52,16 @@ export default function Navbar() {
           )}
         </div>
         <div className={"flex justify-end items-center h-full space-x-4 " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-            {!token ? (
-            <>
-              {route !== "/" && (
+            {route !== "/" && (
                 <NavLink to="/" className={"font-bold text-xl"}>Destacados</NavLink>
               )}
-            </>
-          ) : (
-            <>
-              {route !== "/Perfil" && (
-                <NavLink to="/" className={"font-bold text-xl"}>Filtros</NavLink>
-              )}
-            </>
-          )}
+            {token && (
+              <>
+                {route !== "/Perfil" && (
+                  <NavLink to="/" className={"font-bold text-xl"}>Filtros</NavLink>
+                )}
+              </>
+            )}
         </div>
       </div>
     </div>
