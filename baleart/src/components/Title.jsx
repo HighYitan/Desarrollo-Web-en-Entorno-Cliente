@@ -24,7 +24,7 @@ export default function Title(){
                 setTitle("Informació de Contacte");
                 break;
             case "/Perfil":
-                setTitle("Editar Perfil");
+                setTitle("Perfil");
                 break;
             case "/Perfil/Comentaris":
                 setTitle("Els meus comentaris");

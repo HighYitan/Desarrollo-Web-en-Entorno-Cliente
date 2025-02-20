@@ -13,7 +13,7 @@ export default function Alert({ type, errors }) {
     }
     return(
         <div
-            className={"flex p-4 mb-4 text-sm rounded-lg " + ((type === "danger") ? ((theme === "dark") ? "bg-red-950 text-red-300" : "bg-red-300 text-red-950") :
+            className={"flex p-4 mt-4 text-sm rounded-lg " + ((type === "danger") ? ((theme === "dark") ? "bg-red-950 text-red-300" : "bg-red-300 text-red-950") :
                 ((type === "success") ? ((theme === "dark") ? "bg-green-950 text-green-300" : "bg-green-300 text-green-950") :
                     ((type === "info") ? ((theme === "dark") ? "bg-blue-950 text-blue-300" : "bg-blue-300 text-blue-950") :
                         ((type === "warning") && ((theme === "dark") ? "bg-yellow-950 text-yellow-300" : "bg-yellow-300 text-yellow-950"))

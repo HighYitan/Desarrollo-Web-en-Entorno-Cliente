@@ -40,7 +40,7 @@ export default function Navbar() {
           ) : (
             <>
               {route !== "/Perfil" && (
-                <NavLink to="/" className={"font-bold text-xl"}>Perfil</NavLink>
+                <NavLink to="/Perfil" className={"font-bold text-xl"}>Perfil</NavLink>
               )}
               {route !== "/Espais" && (
                 <NavLink to="/Espais" className={"font-bold text-xl"}>Espais</NavLink>
@@ -57,7 +57,7 @@ export default function Navbar() {
               )}
             {token && (
               <>
-                {route !== "/Perfil" && (
+                {route !== "/Filtro" && (
                   <NavLink to="/" className={"font-bold text-xl"}>Filtros</NavLink>
                 )}
               </>

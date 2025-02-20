@@ -13,6 +13,9 @@ import Login from '../pages/user/Login';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
 import Loading from './Loading';
+import Profile from '../pages/user/Profile';
+import Space from '../pages/Space';
+import Comments from '../pages/Comments';
 import { ThemeContext } from "../context/ThemeContext";
 
 export default function Content(){
@@ -22,12 +25,12 @@ export default function Content(){
     const {loading} = useContext(DataContext);
     console.log(loading);
 
-    function handleAlert({type, text}){
+    /*function handleAlert({type, text}){
         setAlert({show:true, type, text});
         setTimeout(() => {
           setAlert({show:false});
         }, 5000)
-    }
+    }*/
     return(
         <>
             {loading ? <Loading /> :
@@ -37,22 +40,22 @@ export default function Content(){
                         <Customization />
                         <Title />
                         <Routes>
-                            {!token ?
+                            {!token ? (
                                 <>
                                     <Route path="/Registre" element={<Register />} />
                                     <Route path="/Autenticar" element={<Login />} />
-                                    <Route path="/" element={<Highlights />} />
-                                    <Route path="/Nosaltres" element={<About />} />
-                                    <Route path="/Contacte" element={<Contact />} />
                                 </>
-                            :
+                                ) : (
                                 <>
-                                    <Route path="/" element={<Highlights />} />
-                                    <Route path="/Nosaltres" element={<About />} />
-                                    <Route path="/Contacte" element={<Contact />} />
+                                    <Route path="/Perfil" element={<Profile />}/>
                                     <Route path="/Espais" element={<Spaces />}/>
-                                </> 
+                                    <Route path="/Espai" element={<Space />}/>
+                                    <Route path="/Comentaris" element={<Comments />}/>
+                                </>)
                             }
+                            <Route path="/" element={<Highlights />} />
+                            <Route path="/Nosaltres" element={<About />} />
+                            <Route path="/Contacte" element={<Contact />} />
                             <Route path="*" element={<Navigate to="/" />} />
                         </Routes>
                     </main>
