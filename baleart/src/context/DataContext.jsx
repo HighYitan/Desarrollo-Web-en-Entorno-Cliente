@@ -30,16 +30,16 @@ export const DataContextProvider = ({children}) => {
           "Accept": "application/json"
         }
       })
-        .then(response => {
-          localStorage.setItem('spaces', JSON.stringify(response.data.data));
-          setSpaces(response.data.data);
-        })
-        .catch(error => {
-          console.error(error);
-        })
-        .finally(() => {
-          setLoading(false); // Set loading to false after data is fetched
-        });
+      .then(response => {
+        localStorage.setItem('spaces', JSON.stringify(response.data.data));
+        setSpaces(response.data.data);
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(() => {
+        setLoading(false); // Set loading to false after data is fetched
+      });
     }
     setLoading(false);
   }, []);

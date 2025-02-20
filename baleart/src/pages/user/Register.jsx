@@ -48,18 +48,20 @@ export default function Register(){
                 console.log("Registration successful:", response.data);
                 localStorage.setItem('tokenCache', JSON.stringify(response.data.acces_token));
                 setToken(response.data.acces_token);
-                localStorage.setItem('loginCache', JSON.stringify({
-                    nom: response.data.nom,
-                    cognom: response.data.cognom,
-                    email: response.data.email,
-                    telèfon: response.data.telèfon
-                }));
-                setLogin({
-                    nom: response.data.nom,
-                    cognom: response.data.cognom,
-                    email: response.data.email,
-                    telèfon: response.data.telèfon
-                });
+                /*localStorage.setItem('loginCache', JSON.stringify(
+                    //nom: response.data.nom,
+                    //cognom: response.data.cognom,
+                    //email: response.data.email,
+                    //telèfon: response.data.telèfon
+                    response.data.email
+                ));*/
+                setLogin(
+                    //nom: response.data.nom,
+                    //cognom: response.data.cognom,
+                    //email: response.data.email,
+                    //telèfon: response.data.telèfon
+                    response.data.email
+                );
                 console.log("Formulario enviado");
                 redirect("/");
             }
