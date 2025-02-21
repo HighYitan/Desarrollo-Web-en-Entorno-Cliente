@@ -18,19 +18,36 @@ export default function EditProfile(){
 
     function handleUpdate(event) {
         event.preventDefault();
-        
-        axios.put("http://baleart.test/api/user/" + login.email, {
+        console.log(login.email);
+        console.log(token);
+        console.log(event.target.name.value);
+        console.log(event.target.surname.value);
+        console.log(event.target.email.value);
+        console.log(event.target.phone.value);
+        console.log(event.target.password.value);
+
+        const formData = {
             nom: event.target.name.value,
             cognom: event.target.surname.value,
             email: event.target.email.value,
             telèfon: event.target.phone.value,
-            contrasenya: event.target.password.value,
+            contrasenya: event.target.password.value
+          };
+        axios.put("http://baleart.test/api/user/" + login.email, formData, {
             headers: {
-                "Authorization": "Bearer " + token
-            }
+                Authorization: "Bearer " + token,
+                "Accept": "application/json",
+                //"content-type": "multipart/form-data",
+                //_method: "put"
+            },
+            //nom: event.target.name.value,
+            //cognom: event.target.surname.value,
+            //email: event.target.email.value,
+            //telèfon: event.target.phone.value,
+            //contrasenya: event.target.password.value,
         })
         .then(response => {
-            if(!response.data.acces_token){
+            /*if(!response.data.acces_token){
                 console.error("Error updating:", response.data.data);
                 setErrors({
                     nom: response.data.data.nom,
@@ -41,28 +58,28 @@ export default function EditProfile(){
                 });
                 //return;
                 console.log(errors);
-            }
-            else{
+            }*/
+            //else{
                 console.log("Update successful:", response.data);
-                localStorage.setItem('tokenCache', JSON.stringify(response.data.acces_token));
-                setToken(response.data.acces_token);
-                /*localStorage.setItem('loginCache', JSON.stringify(
-                    //nom: response.data.nom,
-                    //cognom: response.data.cognom,
-                    //email: response.data.email,
-                    //telèfon: response.data.telèfon
-                    response.data.email
-                ));*/
-                setLogin(
-                    //nom: response.data.nom,
-                    //cognom: response.data.cognom,
-                    //email: response.data.email,
-                    //telèfon: response.data.telèfon
-                    response.data.email
-                );
+                //localStorage.setItem('tokenCache', JSON.stringify(response.data.acces_token));
+                //setToken(response.data.acces_token);
+                localStorage.setItem('loginCache', JSON.stringify({
+                    nom: response.data.data.nom,
+                    cognom: response.data.data.cognom,
+                    email: response.data.data.email,
+                    telèfon: response.data.data.telèfon
+                    //response.data.email
+                }));
+                setLogin({
+                    nom: response.data.data.nom,
+                    cognom: response.data.data.cognom,
+                    email: response.data.data.email,
+                    telèfon: response.data.data.telèfon
+                    //response.data.email
+                });
                 console.log("Formulario enviado");
                 redirect("/");
-            }
+            //}
         })
         .catch(error => {
             console.error("Error updating:", error);

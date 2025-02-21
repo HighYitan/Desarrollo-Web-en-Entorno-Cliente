@@ -28,7 +28,7 @@ export const TokenContextProvider = ({children}) => {
                 //localStorage.setItem('userDataCache', JSON.stringify(login));
                 axios.get("http://baleart.test/api/user/" + login, {
                     headers: {
-                        "Authorization": "Bearer " + token,
+                        "Authorization": "Bearer " + token
                     }
                 })
                 .then(response => {

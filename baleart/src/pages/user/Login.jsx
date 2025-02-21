@@ -38,13 +38,13 @@ export default function Login(){
                     //telèfon: response.data.telèfon
                     response.data.email
                 ));*/
-                setLogin(
-                    //nom: response.data.nom,
-                    //cognom: response.data.cognom,
-                    //email: response.data.email,
-                    //telèfon: response.data.telèfon
-                    response.data.email
-                );
+                setLogin({
+                    nom: response.data.nom,
+                    cognom: response.data.cognom,
+                    email: response.data.email,
+                    telèfon: response.data.telèfon
+                    //response.data.email
+                });
                 console.log("Formulario enviado");
                 redirect("/");
             }
