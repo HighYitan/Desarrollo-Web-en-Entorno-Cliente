@@ -29,6 +29,13 @@ export default function Login(){
             }
             else{
                 console.log("Login successful:", response.data);
+                setLogin(
+                    //nom: response.data.nom,
+                    //cognom: response.data.cognom,
+                    //email: response.data.email,
+                    //telèfon: response.data.telèfon
+                    response.data.email
+                );
                 localStorage.setItem('tokenCache', JSON.stringify(response.data.acces_token));
                 setToken(response.data.acces_token);
                 /*localStorage.setItem('loginCache', JSON.stringify(
@@ -38,13 +45,6 @@ export default function Login(){
                     //telèfon: response.data.telèfon
                     response.data.email
                 ));*/
-                setLogin({
-                    nom: response.data.nom,
-                    cognom: response.data.cognom,
-                    email: response.data.email,
-                    telèfon: response.data.telèfon
-                    //response.data.email
-                });
                 console.log("Formulario enviado");
                 redirect("/");
             }
@@ -86,7 +86,7 @@ export default function Login(){
                     />
                     {errors.message.length > 0 && <Alert type="danger" errors={errors.message}/>}
                     <button
-                        id="Register"
+                        id="login"
                         className={"text-center font-bold w-9/10 sm:w-19/20 py-2 my-6 rounded " + ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900")}
                         type="submit"
                     >

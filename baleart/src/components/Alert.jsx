@@ -13,7 +13,7 @@ export default function Alert({ type, errors }) {
     }
     return(
         <div
-            className={"flex p-4 mt-4 text-sm rounded-lg " + ((type === "danger") ? ((theme === "dark") ? "bg-red-950 text-red-300" : "bg-red-300 text-red-950") :
+            className={"flex p-4 my-4 text-sm rounded-lg " + ((type === "danger") ? ((theme === "dark") ? "bg-red-950 text-red-300" : "bg-red-300 text-red-950") :
                 ((type === "success") ? ((theme === "dark") ? "bg-green-950 text-green-300" : "bg-green-300 text-green-950") :
                     ((type === "info") ? ((theme === "dark") ? "bg-blue-950 text-blue-300" : "bg-blue-300 text-blue-950") :
                         ((type === "warning") && ((theme === "dark") ? "bg-yellow-950 text-yellow-300" : "bg-yellow-300 text-yellow-950"))
@@ -32,13 +32,18 @@ export default function Alert({ type, errors }) {
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
             <span className="sr-only">Alert Info</span>
-            <div>
-                <span className="font-medium">Ensure that these requirements are met:</span>
-                <ul className="mt-1.5 list-disc list-inside">
-                {errors && errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                ))}
-                </ul>
+            <div> {/* This div is for the danger to align the ul below the span text */}
+            {type === "danger" && 
+                <>
+                    <span className="font-medium">Ensure that these requirements are met:</span>
+                    <ul className="mt-1.5 list-disc list-inside">
+                        {errors && errors.map((error, index) => (
+                            <li key={index}>{error}</li>
+                        ))}
+                    </ul>
+                </>
+            }
+            {type === "success" && <span className="font-medium">{errors}</span>}
             </div>
         </div>
     )

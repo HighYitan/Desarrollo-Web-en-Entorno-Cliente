@@ -32,7 +32,7 @@ export default function Register(){
         }*/
         )
         .then(response => {
-            if(!response.data.acces_token){
+            /*if(!response.data.acces_token){
                 console.error("Error registering:", response.data);
                 setErrors({
                     nom: response.data.nom,
@@ -43,8 +43,8 @@ export default function Register(){
                 });
                 //return;
                 console.log(errors);
-            }
-            else{
+            }*/
+            //else{
                 console.log("Registration successful:", response.data);
                 localStorage.setItem('tokenCache', JSON.stringify(response.data.acces_token));
                 setToken(response.data.acces_token);
@@ -55,16 +55,16 @@ export default function Register(){
                     //telèfon: response.data.telèfon
                     response.data.email
                 ));*/
-                setLogin({
-                    nom: response.data.nom,
-                    cognom: response.data.cognom,
-                    email: response.data.email,
-                    telèfon: response.data.telèfon
-                    //response.data.email
-                });
+                setLogin(
+                    //nom: response.data.nom,
+                    //cognom: response.data.cognom,
+                    //email: response.data.email,
+                    //telèfon: response.data.telèfon
+                    response.data.email
+                );
                 console.log("Formulario enviado");
                 redirect("/");
-            }
+            //}
         })
         .catch(error => {
             console.error("Error registering:", error);
@@ -135,7 +135,7 @@ export default function Register(){
                     />
                     {errors.contrasenya.length > 0 && <Alert type="danger" errors={errors.contrasenya}/>}
                     <button
-                        id="Register"
+                        id="register"
                         className={"text-center font-bold w-9/10 sm:w-19/20 py-2 my-6 rounded " + ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900")}
                         type="submit"
                     >
