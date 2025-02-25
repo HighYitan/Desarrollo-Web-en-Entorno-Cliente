@@ -8,20 +8,25 @@ export default function Spaces() {
   const { theme } = useContext(ThemeContext);
   const { token, setToken, login, setLogin } = useContext(TokenContext);
   const { spaces, setSpaces } = useContext(DataContext);
+  const { spacesImages, setSpacesImages } = useContext(DataContext);
+  const [currentSpacesImages, setCurrentSpacesImages] = useState([]);
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const spacesPerPage = 10;
 
-  const indexOfLastComment = currentPage * spacesPerPage;
-  const indexOfFirstComment = indexOfLastComment - spacesPerPage;
-  const currentSpaces = spaces.slice(indexOfFirstComment, indexOfLastComment);
+  const indexOfLastSpace = currentPage * spacesPerPage;         // 9, 19, 29, 39, 49, 59, 69, 79, 89, 99, 109, 119, 129, 139
+  const indexOfFirstSpace = indexOfLastSpace - spacesPerPage; // 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130
+  const currentSpaces = spaces.slice(indexOfFirstSpace, indexOfLastSpace); // 0-9, 10-19, 20-29, 30-39, 40-49, 50-59, 60-69, 70-79, 80-89, 90-99, 100-109, 110-119, 120-129, 130-139
 
-  const totalPages = Math.ceil(spaces.length / spacesPerPage);
+  const totalPages = Math.ceil(spaces.length / spacesPerPage); // 140 / 10 = 14 pages rounded up
 
   const[displayPages, setDisplayPages] = useState({
     previous: currentPage - 5,
     next: currentPage + 5
   });
+
+  //console.log(currentSpaces);
 
   function handlePagination(pageNumber){
       setCurrentPage(pageNumber);
@@ -44,18 +49,35 @@ export default function Spaces() {
         next: currentPage + 5
       });
     }
-  }
+  };
 
+  function findImages(currentSpaces){
+    const listImages = [];
+    if(currentSpaces){
+      for(const space of currentSpaces){
+        for(const spaceImage of spacesImages){
+          console.log(spaceImage);
+          if(space.registre === spaceImage.registre){
+            listImages.push(spaceImage);
+            break;
+          }
+        }
+      }
+    setCurrentSpacesImages(listImages);
+    }
+  };
 
   useEffect(() => {
     handleDisplayPages();
+    findImages(currentSpaces);
   }, [currentPage]);
   return (
     <>
       <div className="container mx-auto pt-5 pb-10 px-2">
-          <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-2">
+          {/*<div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-2">*/}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
             {currentSpaces && currentSpaces.map((space, index) => (
-              <Card key={index} space={space} />
+              <Card key={index} space={space} spaceImage={currentSpacesImages[index]}/>
             ))}
           </div>
       </div>
