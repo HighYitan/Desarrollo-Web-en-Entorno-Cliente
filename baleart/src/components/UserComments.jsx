@@ -54,30 +54,47 @@ export default function UserComments(){
     console.log(login.comentaris);
     console.log(spaces.comentaris);
     console.log(spaces[0].comentaris);
+    console.log(comments.comment.length);
 
     useEffect(() => {
         if (login.comentaris && login.comentaris.length > 0) {
-            const filteredComments = [];
-            const filteredSpaces = [];
+            let filteredComments = [];
+            let filteredSpaces = [];
             login.comentaris.forEach((comentari) => {
+                console.log(comentari);
                 spaces.forEach((space) => {
                     if (space.comentaris && space.comentaris.length > 0) {
                         space.comentaris.forEach((spaceComentari) => {
+                            console.log(spaceComentari);
                             if (
-                                spaceComentari.comentari.toString() === comentari.comentari.toString() &&
-                                (spaceComentari.imatges && spaceComentari.imatges.length > 0 && comentari.imatges && comentari.imatges.length > 0) &&
-                                spaceComentari.imatges.toString() === comentari.imatges.toString() &&
+                                (spaceComentari.comentari.toString() === comentari.comentari.toString()) &&
+                                //(spaceComentari.imatges && spaceComentari.imatges.length > 0 && comentari.imatges && comentari.imatges.length > 0) &&
+                                //(spaceComentari.imatges.toString() === comentari.imatges.toString()) &&
                                 (spaceComentari.puntuació && comentari.puntuació) &&
-                                spaceComentari.puntuació.toString() === comentari.puntuació.toString()
+                                (spaceComentari.puntuació.toString() === comentari.puntuació.toString())
                             ) {
-                                filteredComments.push(comentari);
-                                filteredSpaces.push(space);
+                                if(spaceComentari.imatges && comentari.imatges){
+                                    if(spaceComentari.imatges.toString() === comentari.imatges.toString()){
+                                        filteredComments = [...filteredComments, comentari];
+                                        filteredSpaces = [...filteredSpaces, space];
+                                    }
+                                }
+                                else{
+                                    filteredComments = [...filteredComments, comentari];
+                                    filteredSpaces = [...filteredSpaces, space];
+                                }
+                                console.log(comentari.comentari, space.comentari)
+                                //filteredComments.push(comentari);
+                                //filteredSpaces.push(space);
+                                
+                                //filteredComments = [...filteredComments, comentari];
+                                //filteredSpaces = [...filteredSpaces, space];
                             }
                         });
                     }
                 });
             });
-            //console.log(filteredComments, filteredSpaces);
+            console.log(filteredComments);
             setComments({comment: filteredComments, spaceComment: filteredSpaces});
         }
     }, []);

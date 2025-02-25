@@ -58,7 +58,7 @@ export default function Spaces() {
         for(const spaceImage of spacesImages){
           console.log(spaceImage);
           if(space.registre === spaceImage.registre){
-            listImages.push(spaceImage);
+            listImages.push(spaceImage.image);
             break;
           }
         }
@@ -73,13 +73,14 @@ export default function Spaces() {
   }, [currentPage]);
   return (
     <>
-      <div className="container mx-auto pt-5 pb-10 px-2">
-          {/*<div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-2">*/}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-            {currentSpaces && currentSpaces.map((space, index) => (
-              <Card key={index} space={space} spaceImage={currentSpacesImages[index]}/>
-            ))}
-          </div>
+      <div className="container w-full sm:w-4/6 mx-auto pt-5 pb-10 px-2">
+        {/*<div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-2">*/}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
+          {currentSpaces && currentSpaces.map((space, index) => (
+            //console.log((!(space.puntuacióMitjana) === undefined) && space.puntuacióMitjana),
+            <Card key={index} space={space} spaceImage={currentSpacesImages[index]}/>
+          ))}
+        </div>
       </div>
       <div className="flex flex-wrap justify-center mt-4">
         {displayPages.previous > 1 && (
