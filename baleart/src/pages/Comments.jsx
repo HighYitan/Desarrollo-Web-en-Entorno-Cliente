@@ -50,15 +50,19 @@ export default function Comments(){
     }
 
     function listComments(){
+        const listComments = [];
+        const listSpaceComments = [];
         spaces.forEach((space) => {
             if (space.comentaris && space.comentaris.length > 0) {
                 space.comentaris.forEach((comentari) => {
                     console.log(comentari);
-                    setComments([...comments, comentari]);
-                    setSpaceComments([...spaceComments, space]);
+                    listComments.push(comentari);
+                    listSpaceComments.push(space);
                 });
             }
         });
+        setComments(listComments);
+        setSpaceComments(listSpaceComments);
     }
     
     useEffect(() => {
@@ -70,9 +74,6 @@ export default function Comments(){
 
     return(
         <>
-            <h1 className={"flex justify-center items-center text-xl sm:text-2xl rounded-lg font-bold py-2 mx-1 mt-4 " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-                Els teus comentaris
-            </h1>
             <div className="flex justify-center">
                 <div className="w-full rounded-lg mt-4">
                     {(comments.length > 0) ? (
@@ -81,7 +82,6 @@ export default function Comments(){
                             {currentComments.map((comment, index) => (
                                 <div key={index} className={"border mx-2 mb-4 rounded-lg " + ((theme === "dark") ? "bg-red-950 border-gray-200 text-white" : "bg-red-300 border-gray-900 text-gray-900")}>
                                     <div className="flex flex-col sm:flex-row justify-between border-gray-200">
-                                        <h3 className="text-lg mx-2 sm:mx-4 mt-4 text-center font-bold">{login.nom + " " + login.cognom}</h3>
                                         <a href="#" className="text-lg mx-2 sm:mx-4 mt-4 text-center font-bold">{spaceComments[index].nom}</a>
                                     </div>
                                     <h3 className="text-md mx-2 mt-2 text-center font-semibold">{comment.comentari}</h3>

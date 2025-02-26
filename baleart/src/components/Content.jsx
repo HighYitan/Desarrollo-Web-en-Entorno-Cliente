@@ -49,7 +49,7 @@ export default function Content(){
                                 <>
                                     <Route path="/Perfil" element={<Profile />}/>
                                     <Route path="/Espais" element={<Spaces />}/>
-                                    <Route path="/Espai" element={<Space />}/>
+                                    <Route path="/Espai/:registre" element={<Space />} />
                                     <Route path="/Comentaris" element={<Comments />}/>
                                 </>)
                             }

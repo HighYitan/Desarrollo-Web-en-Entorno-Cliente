@@ -73,67 +73,53 @@ export default function Spaces() {
   }, [currentPage]);
   return (
     <>
-      <div className="container w-full sm:w-4/6 mx-auto pt-5 pb-10 px-2">
-        {/*<div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-2">*/}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
-          {currentSpaces && currentSpaces.map((space, index) => (
-            //console.log((!(space.puntuacióMitjana) === undefined) && space.puntuacióMitjana),
-            <Card key={index} space={space} spaceImage={currentSpacesImages[index]}/>
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-wrap justify-center mt-4">
-        {displayPages.previous > 1 && (
-          <button
-            key={1}
-            onClick={() => handlePagination(1)}
-            className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === 1) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")}
-          >
-            1
-          </button>
-        )}
-        {displayPages.previous > 2 && <button className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === 1) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")} onClick={() => handlePagination((currentPage - 1))}>{"<-"}</button>}
-        {Array.from({ length: displayPages.next - displayPages.previous + 1 }, (_, index) => {
-          const page = displayPages.previous + index;
-          return (
-            <button
-              key={page}
-              onClick={() => handlePagination(page)}
-              className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === page) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")}
-            >
-              {page}
-            </button>
-          );
-        })}
-        {displayPages.next < totalPages - 1 && <button className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === totalPages) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")} onClick={() => handlePagination((currentPage + 1))}>{"->"}</button>}
-        {displayPages.next < totalPages && (
-          <button
-            key={totalPages}
-            onClick={() => handlePagination(totalPages)}
-            className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === totalPages) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")}
-          >
-            {totalPages}
-          </button>
-        )}
-      </div>
-    </> 
-  ); //Poner el else de "No hi ha espais"
-}
-
-/*import { useContext } from 'react';
-import { AppContext } from '../components/Context';
-import Card from '../components/Card';
-
-export default function Spaces() {
-  const { spaces } = useContext(AppContext);
-
-  return (
-    <div className="container mx-auto pt-5 pb-10 px-2">
-      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-2">
-        {spaces && spaces.map((space, index) => (
-          <Card key={index} space={space} />
-        ))}
-      </div>
-    </div>
+      {(spaces.length > 0) ? (
+        <>
+          <div className="container w-full sm:w-4/6 mx-auto pt-5 pb-10 px-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
+              {currentSpaces && currentSpaces.map((space, index) => (
+                <Card key={index} space={space} spaceImage={currentSpacesImages[index]}/>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-wrap justify-center mt-4">
+            {displayPages.previous > 1 && (
+              <button
+                key={1}
+                onClick={() => handlePagination(1)}
+                className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === 1) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")}
+              >
+                1
+              </button>
+            )}
+            {displayPages.previous > 2 && <button className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === 1) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")} onClick={() => handlePagination((currentPage - 1))}>{"<-"}</button>}
+            {Array.from({ length: displayPages.next - displayPages.previous + 1 }, (_, index) => {
+              const page = displayPages.previous + index;
+              return (
+                <button
+                  key={page}
+                  onClick={() => handlePagination(page)}
+                  className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === page) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")}
+                >
+                  {page}
+                </button>
+              );
+            })}
+            {displayPages.next < totalPages - 1 && <button className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === totalPages) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")} onClick={() => handlePagination((currentPage + 1))}>{"->"}</button>}
+            {displayPages.next < totalPages && (
+              <button
+                key={totalPages}
+                onClick={() => handlePagination(totalPages)}
+                className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === totalPages) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")}
+              >
+                {totalPages}
+              </button>
+            )}
+          </div>
+        </> 
+      ) : (
+        <h3 className={"text-lg mx-2 sm:mx-4 mt-4 text-center font-bold " + ((theme === "dark") ? "text-white" : "text-gray-900")}>No hi ha espais</h3>
+      )}
+    </>
   );
-}*/
+}
