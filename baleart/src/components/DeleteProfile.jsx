@@ -1,11 +1,13 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { TokenContext } from "../context/TokenContext";
+import { LanguageContext } from "../context/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from "./Modal";
 export default function DeleteProfile(){
     const { theme } = useContext(ThemeContext);
+    const { language } = useContext(LanguageContext);
     const { token, setToken, login, setLogin } = useContext(TokenContext);
     const [showModal, setShowModal] = useState(false);
     const redirect = useNavigate();
@@ -17,13 +19,6 @@ export default function DeleteProfile(){
 
     function handleDelete(){
         axios.delete("http://baleart.test/api/user/" + login.email, {headers}) //Put and Delete on Axios only works with parameters in this way
-            //email: login.email
-         /*{
-            headers: {
-                Authorization: "Bearer " + token,
-                "Accept": "application/json"
-            }*/
-        
         .then(response => {
             console.log("Delete successful:", response.data);
         })
@@ -44,7 +39,11 @@ export default function DeleteProfile(){
                 className={"flex justify-center items-center h-16 text-center text-xs sm:text-base rounded-lg shadow-sm font-bold py-2 m-1 " + ((theme === "dark") ? "text-white hover:text-gray-900 bg-black hover:bg-white" : "text-gray-900 hover:text-white bg-white hover:bg-black")}
                 onClick={() => setShowModal(true)}
             >
-                Borrar compte
+                {
+                    (language === "CA" ? ("Borrar compte") :
+                    language === "ES" ? ("Borrar cuenta") :
+                    ("Delete account"))
+                }
             </div>
             {showModal && <Modal onSubmit={handleDelete} onClose={() => setShowModal(false)} mode={"delete"}/>}
         </>

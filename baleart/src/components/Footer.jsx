@@ -2,8 +2,10 @@ import {useContext} from "react";
 import { NavLink } from "react-router-dom";
 import { TokenContext } from "../context/TokenContext";
 import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
 export default function Footer() {
     const { theme } = useContext(ThemeContext);
+    const { language } = useContext(LanguageContext);
     const { route } = useContext(TokenContext);
     function handleGoingTop(){
         window.scrollTo({
@@ -12,20 +14,31 @@ export default function Footer() {
         });
     }
     return(
-        <footer className={"fixed bottom-0 w-full py-4 " + ((theme === "dark") ? "bg-black text-white" : "bg-gray-300 text-gray-900")}>
+        <footer className={"fixed bottom-0 w-full py-4 " + ((theme === "dark") ? "bg-black text-white" : "bg-gray-200 text-gray-900")}>
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="mb-4 md:mb-0">
                         <h5 className="flex text-sm font-bold">
-                            © 2025 Baleart. Tots els drets reservats.
+                            © 2025 Baleart.
+                            {language === "CA" && (" Tots els drets reservats.")}
+                            {language === "ES" && (" Todos los derechos reservados.")}
+                            {language === "EN" && (" All rights reserved.")}
                         </h5>
                     </div>
                     <div className="flex space-x-4 items-center">
                         {route !== "/Nosaltres" && (
-                            <NavLink to="/Nosaltres" className={"text-sm font-bold hover:underline"}>Qui Som?</NavLink>
+                            <NavLink to="/Nosaltres" className={"text-sm font-bold hover:underline"}>
+                                {language === "CA" && ("Qui Som?")}
+                                {language === "ES" && ("¿Quienes Somos?")}
+                                {language === "EN" && ("Who are We?")}
+                            </NavLink>
                         )}
                         {route !== "/Contacte" && (
-                            <NavLink to="/Contacte" className={"text-sm font-bold hover:underline"}>Contacta'ns</NavLink>
+                            <NavLink to="/Contacte" className={"text-sm font-bold hover:underline"}>
+                                {language === "CA" && ("Contacta'ns")}
+                                {language === "ES" && ("Contáctanos")}
+                                {language === "EN" && ("Contact Us")}
+                            </NavLink>
                         )}
                         {/* Scroll to Top Button */}
                         <button

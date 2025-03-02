@@ -1,15 +1,19 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
 export default function DarkMode() {
     const { theme, setTheme } = useContext(ThemeContext);
+    const { language } = useContext(LanguageContext);
     return (
         <div className="flex flex-col justify-end items-center mr-4">
             <label
                 htmlFor="theme"
-                className={"mb-2 text-sm font-medium " + ((theme === "dark") ? "text-white" : "text-gray-900")}
-                style={{ width: "75px" }}
+                className={"mb-2 text-sm font-medium text-center " + ((theme === "dark") ? "text-white" : "text-gray-900")}
+                style={{ width: "85px" }} // The icon doesn't change it's shape with a fixed size parent container
             >
-                {theme === "dark" ? "Dark Mode" : "Light Mode"}
+                {language === "CA" && (theme === "dark" ? "Mode de Nit" : "Mode Llum")}
+                {language === "ES" && (theme === "dark" ? "Modo Noche" : "Modo Luz")}
+                {language === "EN" && (theme === "dark" ? "Dark Mode" : "Light Mode")}
             </label>
             <svg 
                 id="theme"

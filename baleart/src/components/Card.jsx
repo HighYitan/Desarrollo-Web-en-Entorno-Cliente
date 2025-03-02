@@ -1,18 +1,13 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import { TokenContext } from "../context/TokenContext";
-import { DataContext } from "../context/DataContext";
+import { LanguageContext } from "../context/LanguageContext";
 import {NavLink} from "react-router-dom";
 
 export default function Card({space, spaceImage}){
   const { theme } = useContext(ThemeContext);
-  const { token, setToken, login, setLogin } = useContext(TokenContext);
-  const { spacesImages, setSpacesImages } = useContext(DataContext);
-  //const [spaceImage, setSpaceImage] = useState();
+  const { language } = useContext(LanguageContext);
 
-  const formattedPuntuacioMitjana = space.puntuacióMitjana ? space.puntuacióMitjana.toFixed(2) : null;
-  
-  space.puntuacióMitjana && console.log(space.puntuacióMitjana);
+  const formattedPuntuacioMitjana = space.puntuacióMitjana ? space.puntuacióMitjana.toFixed(2) : null; // 2 decimals
   
   return(
     <div className="flex justify-center">
@@ -42,13 +37,13 @@ export default function Card({space, spaceImage}){
               </svg>
             ))}
             {space.puntuacióMitjana &&
-            <span className={"text-xs font-bold px-2.5 py-0.5 rounded-sm ms-3 " + ((theme === "dark") ? "bg-red-300 text-gray-900" : "bg-red-950 text-gray-300")}>
-              {formattedPuntuacioMitjana}
-            </span>}
+              <span className={"text-xs font-bold px-2.5 py-0.5 rounded-sm ms-3 " + ((theme === "dark") ? "bg-red-300 text-gray-900" : "bg-red-950 text-gray-300")}>
+                {formattedPuntuacioMitjana}
+              </span>}
           </div>
           <div className="flex items-center justify-between">
             <span className="font-bold text-center line-clamp-3">
-              {space.observacions_CA}
+              {language === "CA" ? space.observacions_CA : language === "ES" ? space.observacions_ES : space.observacions_EN}
             </span>
           </div>
         </div>

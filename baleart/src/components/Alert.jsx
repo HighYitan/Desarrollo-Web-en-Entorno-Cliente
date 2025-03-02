@@ -1,16 +1,10 @@
 import {useContext} from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
 export default function Alert({ type, errors }) {
     const { theme } = useContext(ThemeContext);
+    const { language } = useContext(LanguageContext);
 
-    //For traduction if the language is changed.
-    const requirements = {
-        nom: ["The nom field is required.", "The nom field must be at least 2 characters.", "The nom field must be less than 100 characters.", "The nom field must be a string."],
-        cognom: ["The cognom field is required.", "The cognom field must be at least 2 characters.", "The cognom field must be less than 100 characters.", "The cognom field must be a string."],
-        email: ["The email field is required.", "The email field must be at least 6 characters.", "The email field must be less than 100 characters.", "The email field format is invalid.", "The email field must be a string."],
-        telèfon: ["The telèfon field is required.", "The telèfon field must be at least 7 characters.", "The telèfon field must be less than 100 characters.", "The telèfon field must be a string."],
-        contrasenya: ["The contrasenya field is required.", "The contrasenya field must be at least 6 characters.", "The contrasenya field must be less than 100 characters.", "The contrasenya field format is invalid.", "The contrasenya field must be a string."]
-    }
     return(
         <div
             className={"flex p-4 my-4 text-sm rounded-lg " + ((type === "danger") ? ((theme === "dark") ? "bg-red-950 text-red-300" : "bg-red-300 text-red-950") :
@@ -35,7 +29,7 @@ export default function Alert({ type, errors }) {
             <div> {/* This div is for the danger to align the ul below the span text */}
             {type === "danger" && 
                 <>
-                    <span className="font-medium">Ensure that these requirements are met:</span>
+                    <span className="font-medium">{language === "CA" ? "Assegureu-vos que aquests requeriments es compleixin:" : language === "ES" ? "Asegúrate de que estos requerimientos se cumplan:" : "Ensure that these requirements are met:"}</span>
                     <ul className="mt-1.5 list-disc list-inside">
                         {errors && errors.map((error, index) => (
                             <li key={index}>{error}</li>
@@ -48,5 +42,3 @@ export default function Alert({ type, errors }) {
         </div>
     )
 }
-//bootstrap basic alert
-//<div className={"alert alert-"+type}>{text}</div>;

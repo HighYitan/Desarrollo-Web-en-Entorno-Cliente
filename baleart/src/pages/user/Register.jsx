@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../../context/ThemeContext";
 import { TokenContext } from "../../context/TokenContext";
+import { LanguageContext } from "../../context/LanguageContext";
 import Alert from "../../components/Alert";
 export default function Register(){
     const { theme } = useContext(ThemeContext);
-    const { token, setToken, login, setLogin } = useContext(TokenContext);
+    const { setToken, setLogin } = useContext(TokenContext);
+    const { language } = useContext(LanguageContext);
     const redirect = useNavigate(); // Hook to get the current route and be able to get back to the previous one.
     const [errors, setErrors] = useState({
         nom: [],
@@ -25,14 +27,20 @@ export default function Register(){
             email: event.target.email.value,
             telèfon: event.target.phone.value,
             contrasenya: event.target.password.value
-        }, /*{
-            headers: {
-                "Accept": "application/json"
-            }
-        }*/
+        }, 
         )
         .then(response => {
-            /*if(!response.data.acces_token){
+            if(response.data.acces_token){
+                console.log("Registration successful:", response.data);
+                localStorage.setItem('tokenCache', JSON.stringify(response.data.acces_token));
+                setToken(response.data.acces_token);
+                setLogin(
+                    response.data.email
+                );
+                console.log("Formulario enviado");
+                redirect("/");
+            }
+            else{
                 console.error("Error registering:", response.data);
                 setErrors({
                     nom: response.data.nom,
@@ -41,30 +49,8 @@ export default function Register(){
                     telèfon: response.data.telèfon,
                     contrasenya: response.data.contrasenya
                 });
-                //return;
                 console.log(errors);
-            }*/
-            //else{
-                console.log("Registration successful:", response.data);
-                localStorage.setItem('tokenCache', JSON.stringify(response.data.acces_token));
-                setToken(response.data.acces_token);
-                /*localStorage.setItem('loginCache', JSON.stringify(
-                    //nom: response.data.nom,
-                    //cognom: response.data.cognom,
-                    //email: response.data.email,
-                    //telèfon: response.data.telèfon
-                    response.data.email
-                ));*/
-                setLogin(
-                    //nom: response.data.nom,
-                    //cognom: response.data.cognom,
-                    //email: response.data.email,
-                    //telèfon: response.data.telèfon
-                    response.data.email
-                );
-                console.log("Formulario enviado");
-                redirect("/");
-            //}
+            }
         })
         .catch(error => {
             console.error("Error registering:", error);
@@ -80,7 +66,11 @@ export default function Register(){
                     onSubmit={handleRegister}
                 >
                     <label htmlFor="name" className={"m-4 font-bold " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-                        Nom
+                        {
+                            (language === "CA" ? ("Nom") :
+                            language === "ES" ? ("Nombre") :
+                            ("Name"))
+                        }
                     </label>
                     <input
                         type="text"
@@ -91,7 +81,11 @@ export default function Register(){
                     />
                     {errors.nom.length > 0 && <Alert type="danger" errors={errors.nom}/>}
                     <label htmlFor="surname" className={"m-4 font-bold " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-                        Cognom
+                        {
+                            (language === "CA" ? ("Cognom") :
+                            language === "ES" ? ("Apellido") :
+                            ("Surname"))
+                        }
                     </label>
                     <input
                         type="text"
@@ -113,7 +107,11 @@ export default function Register(){
                     />
                     {errors.email.length > 0 && <Alert type="danger" errors={errors.email}/>}
                     <label htmlFor="phone" className={"m-4 font-bold " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-                        Telèfon
+                        {
+                            (language === "CA" ? ("Telèfon") :
+                            language === "ES" ? ("Teléfono") :
+                            ("Phone"))
+                        }
                     </label>
                     <input
                         type="text"
@@ -124,7 +122,11 @@ export default function Register(){
                     />
                     {errors.telèfon.length > 0 && <Alert type="danger" errors={errors.telèfon}/>}
                     <label htmlFor="password" className={"m-4 font-bold " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-                        Contrasenya
+                        {
+                            (language === "CA" ? ("Contrasenya") :
+                            language === "ES" ? ("Contraseña") :
+                            ("Password"))
+                        }
                     </label>
                     <input
                         type="password"
@@ -139,7 +141,11 @@ export default function Register(){
                         className={"text-center font-bold w-9/10 sm:w-19/20 py-2 my-6 rounded " + ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900")}
                         type="submit"
                     >
-                        Registrar-se
+                        {
+                            (language === "CA" ? ("Registrar-se") :
+                            language === "ES" ? ("Registrarse") :
+                            ("Sign Up"))
+                        }
                     </button>
                 </form>
             </div>

@@ -2,151 +2,111 @@ import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { TokenContext } from "../context/TokenContext";
 import { DataContext } from "../context/DataContext";
+import { LanguageContext } from "../context/LanguageContext";
+import Comment from '../components/Comment';
 export default function UserComments(){
     const { theme } = useContext(ThemeContext);
-    const { token, setToken, login, setLogin } = useContext(TokenContext);
-    const { spaces, setSpaces } = useContext(DataContext);
-    const [comments, setComments] = useState({
+    const { login } = useContext(TokenContext);
+    const { spaces } = useContext(DataContext);
+    const { language } = useContext(LanguageContext);
+    const [comments, setComments] = useState({ // State to store the comments and the spaces where they were made
         comment: [],
         spaceComment: []
     });
-    const [currentPage, setCurrentPage] = useState(1);
-    const commentsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1); // State to store the current page of comments
+    const commentsPerPage = 10; // Number of comments per page
 
-    const indexOfLastComment = currentPage * commentsPerPage;
-    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-    const currentComments = comments.comment.slice(indexOfFirstComment, indexOfLastComment);
+    const indexOfLastComment = currentPage * commentsPerPage; // Index of the last comment of the current page
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage; // Index of the first comment of the current page
+    const currentComments = comments.comment.slice(indexOfFirstComment, indexOfLastComment); // Comments of the current page
 
-    const totalPages = Math.ceil(comments.comment.length / commentsPerPage);
+    const totalPages = Math.ceil(comments.comment.length / commentsPerPage); // Total number of pages
 
-    const[displayPages, setDisplayPages] = useState({
+    const[displayPages, setDisplayPages] = useState({ // State to store the pages to display in the pagination
         previous: currentPage - 5,
         next: currentPage + 5
     });
     
-    function handlePagination(pageNumber){
+    function handlePagination(pageNumber){ // Function to handle the pagination
         setCurrentPage(pageNumber);
     };
 
-    function handleDisplayPages() {
-        if (currentPage <= 6) {
+    function handleDisplayPages() { // Function to handle the pages to display in the pagination
+        if (currentPage <= 6) { // If the current page is less than or equal to 6
             setDisplayPages({
-                previous: 1,
-                next: Math.min(11, totalPages)
+                previous: 1, // The previous pages are up until reaching the first one
+                next: Math.min(11, totalPages) // The next pages are the minimum between 11 and the total number of pages
             });
-        } else if (currentPage >= totalPages - 5) {
+        } else if (currentPage >= totalPages - 5) { // If the current page is greater than or equal to the total number of pages minus 5
             setDisplayPages({
-                previous: Math.max(1, totalPages - 10),
-                next: totalPages
+                previous: Math.max(1, totalPages - 10), // The previous pages are the maximum between 1 and the total number of pages minus 10
+                next: totalPages // The next pages are up until reaching the last one
             });
         } else {
             setDisplayPages({
-                previous: currentPage - 5,
-                next: currentPage + 5
+                previous: currentPage - 5, // The previous pages are up until the current page minus 5
+                next: currentPage + 5 // The next pages are up until the current page plus 5
             });
         }
     }
     
-    useEffect(() => {
+    useEffect(() => { // UseEffect to handle the display of pages
         handleDisplayPages();
     }, [currentPage]);
 
-    console.log(login.comentaris);
-    console.log(spaces.comentaris);
-    console.log(spaces[0].comentaris);
-    console.log(comments.comment.length);
-
     useEffect(() => {
-        if (login.comentaris && login.comentaris.length > 0) {
+        if (login.comentaris && login.comentaris.length > 0) { // If there are comments made by the logged user
             let filteredComments = [];
             let filteredSpaces = [];
-            login.comentaris.forEach((comentari) => {
+            login.comentaris.forEach((comentari) => { // For each comment made by the logged user
                 console.log(comentari);
-                spaces.forEach((space) => {
-                    if (space.comentaris && space.comentaris.length > 0) {
-                        space.comentaris.forEach((spaceComentari) => {
+                spaces.forEach((space) => { // For each space
+                    if (space.comentaris && space.comentaris.length > 0) { // If there are comments in the space
+                        space.comentaris.forEach((spaceComentari) => { // For each comment in the space
                             console.log(spaceComentari);
-                            if (
+                            if ( // If the comment made by the logged user matches the comment in the space
                                 (spaceComentari.comentari.toString() === comentari.comentari.toString()) &&
-                                //(spaceComentari.imatges && spaceComentari.imatges.length > 0 && comentari.imatges && comentari.imatges.length > 0) &&
-                                //(spaceComentari.imatges.toString() === comentari.imatges.toString()) &&
                                 (spaceComentari.puntuació && comentari.puntuació) &&
                                 (spaceComentari.puntuació.toString() === comentari.puntuació.toString())
                             ) {
-                                if(spaceComentari.imatges && comentari.imatges){
-                                    if(spaceComentari.imatges.toString() === comentari.imatges.toString()){
+                                if(spaceComentari.imatges && comentari.imatges){ // If there are images in the comment made by the logged user and in the comment in the space
+                                    if(spaceComentari.imatges.toString() === comentari.imatges.toString()){ // If the images match
                                         filteredComments = [...filteredComments, comentari];
                                         filteredSpaces = [...filteredSpaces, space];
                                     }
                                 }
-                                else{
+                                else{ // If there are no images in the comment made by the logged user and in the comment in the space
                                     filteredComments = [...filteredComments, comentari];
                                     filteredSpaces = [...filteredSpaces, space];
                                 }
-                                console.log(comentari.comentari, space.comentari)
-                                //filteredComments.push(comentari);
-                                //filteredSpaces.push(space);
-                                
-                                //filteredComments = [...filteredComments, comentari];
-                                //filteredSpaces = [...filteredSpaces, space];
                             }
                         });
                     }
                 });
             });
-            console.log(filteredComments);
-            setComments({comment: filteredComments, spaceComment: filteredSpaces});
+            setComments({comment: filteredComments, spaceComment: filteredSpaces}); // Set the comments and the spaces where they were made
         }
     }, []);
     return(
         <>
             <h1 className={"flex justify-center items-center text-xl sm:text-2xl rounded-lg font-bold py-2 mx-1 mt-4 " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
-                Els teus comentaris
+                {
+                    (language === "CA" ? ("Els teus comentaris") :
+                    language === "ES" ? ("Tus comentarios") :
+                    ("Your comments"))
+                }
             </h1>
             <div className="flex justify-center">
                 <div className="w-full rounded-lg mt-4">
-                    {(comments.comment.length > 0) ? (
+                    {(comments.comment.length > 0) ? ( // If there are comments
                         console.log(comments),
                         <>
-                            {currentComments.map((comment, index) => (
-                                <div key={index} className={"border mx-2 mb-4 rounded-lg " + ((theme === "dark") ? "bg-red-950 border-gray-200 text-white" : "bg-red-300 border-gray-900 text-gray-900")}>
-                                    <div className="flex flex-col sm:flex-row justify-between border-gray-200">
-                                        <h3 className="text-lg mx-2 sm:mx-4 mt-4 text-center font-bold">{login.nom + " " + login.cognom}</h3>
-                                        <a href="#" className="text-lg mx-2 sm:mx-4 mt-4 text-center font-bold">{comments.spaceComment[index].nom}</a>
-                                    </div>
-                                    <h3 className="text-md mx-2 mt-2 text-center font-semibold">{comment.comentari}</h3>
-                                    {(comment.imatges && comment.imatges.length > 0) && (
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center">
-                                            {comment.imatges.map((imatge, index) => (
-                                                <div key={index} className={"w-full " + comment.imatges.length % 2 !== 0 && index === comment.imatges.length - 1 ? 'sm:col-span-2' : ''}>
-                                                    <a className="w-full">
-                                                        <img
-                                                            className="px-1 py-2 sm:p-4 w-full rounded-t-lg"
-                                                            src={imatge.imatge_url}
-                                                            alt="Imatge del comentari"
-                                                        />
-                                                    </a>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                    <div className="flex justify-center mt-2 sm:mt-0 mb-4">
-                                        {[...Array(Math.round(comment.puntuació))].map((_, index) => (
-                                            <svg key={index} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 text-yellow-500">
-                                                <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
-                                            </svg>
-                                        ))}
-                                        {(comment.puntuació < 5) && [...Array(Math.round(5 - comment.puntuació))].map((_, index) => (
-                                            <svg key={index} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-yellow-500">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-                                            </svg>
-                                        ))}
-                                    </div>
-                                </div>
+                            {currentComments.map((comment, index) => ( // For each comment in the current page
+                                <Comment key={index} index={index} comment={comment} spaceComments={comments.spaceComment}/>
                             ))}
                             
                             <div className="flex flex-wrap justify-center mt-4">
-                                {displayPages.previous > 1 && (
+                                {displayPages.previous > 1 && ( // If there are previous pages
                                     <button
                                         key={1}
                                         onClick={() => handlePagination(1)}
@@ -169,7 +129,7 @@ export default function UserComments(){
                                     );
                                 })}
                                 {displayPages.next < totalPages - 1 && <button className={"w-10 py-2 mx-1 mb-4 font-bold rounded " + ((currentPage === totalPages) ? ((theme === "dark") ? "bg-red-950 text-white" : "bg-red-300 text-gray-900") : "bg-gray-500 text-gray-900")} onClick={() => handlePagination((currentPage + 1))}>{"->"}</button>}
-                                {displayPages.next < totalPages && (
+                                {displayPages.next < totalPages && ( // If there are next pages
                                     <button
                                         key={totalPages}
                                         onClick={() => handlePagination(totalPages)}
@@ -181,7 +141,13 @@ export default function UserComments(){
                             </div>
                         </>
                     ) : (
-                        <h3 className={"text-lg mx-2 sm:mx-4 mt-4 text-center font-bold " + ((theme === "dark") ? "text-white" : "text-gray-900")}>No hi ha comentaris</h3>
+                        <h3 className={"text-lg mx-2 sm:mx-4 mt-4 text-center font-bold " + ((theme === "dark") ? "text-white" : "text-gray-900")}>
+                            {
+                                (language === "CA" ? ("No hi ha comentaris") :
+                                language === "ES" ? ("No hay comentarios") :
+                                ("There are no comments"))
+                            }
+                        </h3>
                     )}
                 </div>
             </div>

@@ -19,33 +19,25 @@ import Comments from '../pages/Comments';
 import { ThemeContext } from "../context/ThemeContext";
 
 export default function Content(){
-    const { theme } = useContext(ThemeContext);
-    const {token} = useContext(TokenContext); // Redirect to Highlights if the user is not logged.c
-    console.log(token);
-    const {loading} = useContext(DataContext);
-    console.log(loading);
+    const { theme } = useContext(ThemeContext); // Light or Dark theme.
+    const {token} = useContext(TokenContext); // Redirect to Highlights if the user is not logged.
+    const {loading} = useContext(DataContext); // Loading data from the API.
 
-    /*function handleAlert({type, text}){
-        setAlert({show:true, type, text});
-        setTimeout(() => {
-          setAlert({show:false});
-        }, 5000)
-    }*/
     return(
         <>
             {loading ? <Loading /> :
                 <>
-                    <Header />
+                    <Header /> {/* Header with the navigation bar */}
                     <main className={"min-h-screen pt-2 pb-20 mb-20 " + ((theme === "dark") ? "bg-violet-950" : "bg-violet-300")}>
-                        <Customization />
-                        <Title />
+                        <Customization /> {/* Language and Theme */}
+                        <Title /> {/* Title of the page */}
                         <Routes>
-                            {!token ? (
+                            {!token ? ( // If the user is not logged, allow the routes to Register and Login.
                                 <>
                                     <Route path="/Registre" element={<Register />} />
                                     <Route path="/Autenticar" element={<Login />} />
                                 </>
-                                ) : (
+                                ) : ( // If the user is logged, allow the routes to Profile, Spaces and Comments.
                                 <>
                                     <Route path="/Perfil" element={<Profile />}/>
                                     <Route path="/Espais" element={<Spaces />}/>
@@ -59,7 +51,7 @@ export default function Content(){
                             <Route path="*" element={<Navigate to="/" />} />
                         </Routes>
                     </main>
-                    <Footer />
+                    <Footer /> {/* Footer with the navigation links */}
                 </>
             }
         </>
