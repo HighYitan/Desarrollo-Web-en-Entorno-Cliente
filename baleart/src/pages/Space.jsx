@@ -310,8 +310,9 @@ export default function Space(){
                             </form>
                         </div>
                     </div>
+                    {space.comentaris && space.comentaris.length > 0 && (
                     <div className={"w-full sm:w-4/6 border rounded-lg shadow-sm mt-4 " + ((theme === "dark") ? "text-white bg-gray-900 border-white" : "text-gray-900 bg-gray-300 border-gray-900")}>
-                        {space.comentaris && space.comentaris.length > 0 && (
+                        
                             <div className="w-full rounded-lg mt-4">
                                 <h3 className="text-xl font-bold text-center my-4">
                                     {
@@ -324,8 +325,9 @@ export default function Space(){
                                     <Comment key={index} index={0} comment={comentari} spaceComments={[space]}/>
                                 ))}
                             </div>
-                        )}
+                        
                     </div>
+                    )}
                 </>
             )}
         </div>

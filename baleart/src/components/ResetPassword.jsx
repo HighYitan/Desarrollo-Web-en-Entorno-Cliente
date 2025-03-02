@@ -37,7 +37,11 @@ export default function ResetPassword({setReset}){
             setReset(false);
         })
         .catch(error => {
+            //console.log(error.response.data.errors);
             console.log(error);
+            setErrors({ // Set the errors
+                message: error.response.data.errors.contrasenya,
+            });
         });
     }
     useEffect(() => {

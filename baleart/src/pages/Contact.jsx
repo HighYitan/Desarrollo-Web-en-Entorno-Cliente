@@ -18,13 +18,13 @@ export default function Contact(){
         let errorMessages = [];
 
         if (event.target.name.value === "" || event.target.email.value === "" || event.target.subject.value === "" || event.target.message.value === "") {
-            errorMessages.push("Please fill in all the fields"); // All fields are required
+            errorMessages.push((language === "CA" ? "Omple tots els camps, si us plau" : language === "ES" ? "Rellena todos los campos, por favor" : "Please fill in all the fields")); // All fields are required
         }
         if (!nameRegex.test(event.target.name.value)) { // Check if the name is valid
-            errorMessages.push("Please enter a valid name");
+            errorMessages.push((language === "CA" ? "Utilitza un nom valid, si us plau" : language === "ES" ? "Utiliza un nombre válido, por favor" : "Please enter a valid name"));
         }
         if (!emailRegex.test(event.target.email.value)) { // Check if the email is valid
-            errorMessages.push("Please enter a valid email address");
+            errorMessages.push((language === "CA" ? "Utilitza un email valid, si us plau" : language === "ES" ? "Utiliza un email válido, por favor" : "Please enter a valid email address"));
         }
 
         if (errorMessages.length > 0) { // If there are errors
